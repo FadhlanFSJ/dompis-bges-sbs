@@ -1,0 +1,201 @@
+ID,Nama,Usia,Kategori,Kehamilan,Prioritas
+1,Ani,25,Ibu Hamil,6,Sedang
+2,Budi,70,Lansia,0,Tinggi
+3,Citra,15,Remaja,0,Rendah
+4,Dedi,68,Lansia,0,Tinggi
+5,Evi,28,Ibu Hamil,4,Sedang
+6,Fajar,17,Remaja,0,Rendah
+7,Gita,72,Lansia,0,Tinggi
+8,Haris,16,Remaja,0,Rendah
+9,Indah,26,Ibu Hamil,7,Tinggi
+10,Joko,65,Lansia,0,Tinggi
+11,Kiki,14,Remaja,0,Rendah
+12,Lilis,27,Ibu Hamil,5,Sedang
+13,Maman,75,Lansia,0,Tinggi
+14,Nina,15,Remaja,0,Rendah
+15,Ocha,32,Ibu Hamil,3,Tinggi
+16,Pardi,67,Lansia,0,Tinggi
+17,Qori,18,Remaja,0,Rendah
+18,Rini,29,Ibu Hamil,8,Tinggi
+19,Sigit,73,Lansia,0,Tinggi
+20,Tika,16,Remaja,0,Rendah
+21,Uli,23,Ibu Hamil,2,Tinggi
+22,Vino,69,Lansia,0,Tinggi
+23,Wati,14,Remaja,0,Rendah
+24,Yani,24,Ibu Hamil,6,Sedang
+25,Zaenal,71,Lansia,0,Tinggi
+26,Alif,15,Remaja,0,Rendah
+27,Bunga,28,Ibu Hamil,5,Sedang
+28,Chandra,74,Lansia,0,Tinggi
+29,Dika,13,Remaja,0,Rendah
+30,Erna,30,Ibu Hamil,7,Tinggi
+31,Firman,65,Lansia,0,Tinggi
+32,Gani,16,Remaja,0,Rendah
+33,Hesti,27,Ibu Hamil,6,Sedang
+34,Imam,70,Lansia,0,Tinggi
+35,Jeni,15,Remaja,0,Rendah
+36,Kartini,29,Ibu Hamil,8,Tinggi
+37,Lono,72,Lansia,0,Tinggi
+38,Mira,17,Remaja,0,Rendah
+39,Novi,26,Ibu Hamil,4,Sedang
+40,Oki,68,Lansia,0,Tinggi
+41,Putri,14,Remaja,0,Rendah
+42,Qorin,25,Ibu Hamil,7,Tinggi
+43,Rudi,69,Lansia,0,Tinggi
+44,Sari,13,Remaja,0,Rendah
+45,Tono,75,Lansia,0,Tinggi
+46,Umi,28,Ibu Hamil,5,Sedang
+47,Vera,70,Lansia,0,Tinggi
+48,Widi,16,Remaja,0,Rendah
+49,Yulia,24,Ibu Hamil,3,Tinggi
+50,Zainab,66,Lansia,0,Tinggi
+51,Asep,34,Dewasa,0,Rendah
+52,Rina,31,Dewasa,0,Rendah
+53,Dika,36,Dewasa,0,Rendah
+54,Eka,40,Dewasa,0,Rendah
+55,Sinta,22,Dewasa,0,Rendah
+56,Joko Utami,64,Lansia,0,Tinggi
+57,Feri Susilo,56,Dewasa,0,Tinggi
+58,Heri Purnomo,19,Remaja,0,Sedang
+59,Citra Wibowo,74,Lansia,0,Tinggi
+60,Heri Utami,69,Lansia,0,Tinggi
+61,Citra Susilo,39,Dewasa,0,Rendah
+62,Eva Widodo,35,Dewasa,0,Rendah
+63,Ida Hartono,25,Dewasa,0,Rendah
+64,Dodi Widodo,62,Lansia,0,Tinggi
+65,Citra Purnomo,38,Dewasa,0,Rendah
+66,Ida Wibowo,19,Remaja,0,Rendah
+67,Ida Sari,23,Dewasa,0,Rendah
+68,Joko Saputra,20,Dewasa,0,Rendah
+69,Feri Susilo,31,Dewasa,0,Rendah
+70,Joko Utami,46,Dewasa,0,Rendah
+71,Citra Sari,65,Lansia,0,Tinggi
+72,Bina Saputra,71,Lansia,0,Tinggi
+73,Joko Wibowo,38,Dewasa,0,Rendah
+74,Joko Pratama,31,Dewasa,0,Rendah
+75,Dodi Utami,75,Lansia,0,Tinggi
+76,Heri Purnomo,71,Lansia,0,Tinggi
+77,Eva Susilo,21,Dewasa,0,Rendah
+78,Citra Hartono,72,Lansia,0,Tinggi
+79,Ida Saputra,65,Lansia,0,Tinggi
+80,Gina Pratama,24,Dewasa,0,Rendah
+81,Heri Suharto,18,Remaja,0,Rendah
+82,Bina Pratama,19,Remaja,0,Rendah
+83,Eva Hartono,32,Dewasa,0,Rendah
+84,Gina Hartono,16,Remaja,0,Rendah
+85,Adi Purnomo,52,Dewasa,0,Rendah
+86,Gina Hartono,53,Dewasa,0,Rendah
+87,Dodi Saputra,38,Dewasa,0,Rendah
+88,Dodi Sari,32,Dewasa,0,Rendah
+89,Adi Pratama,60,Dewasa,0,Rendah
+90,Adi Susilo,63,Lansia,0,Tinggi
+91,Citra Widodo,21,Dewasa,0,Rendah
+92,Citra Sari,73,Lansia,0,Tinggi
+93,Adi Widodo,72,Lansia,0,Tinggi
+94,Ida Widodo,49,Dewasa,0,Rendah
+95,Ida Hartono,65,Lansia,0,Tinggi
+96,Eva Purnomo,24,Dewasa,0,Rendah
+97,Citra Wibowo,58,Dewasa,0,Sedang
+98,Gina Susilo,44,Dewasa,0,Sedang
+99,Adi Saputra,53,Dewasa,0,Tinggi
+100,Eva Purnomo,34,Dewasa,0,Tinggi
+101,Heri Pratama,32,Dewasa,0,Rendah
+102,Feri Pratama,65,Lansia,0,Tinggi
+103,Eva Widodo,52,Dewasa,0,Rendah
+104,Ida Saputra,59,Dewasa,0,Rendah
+105,Adi Suharto,26,Dewasa,0,Sedang
+106,Heri Purnomo,19,Remaja,0,Sedang
+107,Citra Wibowo,74,Lansia,0,Tinggi
+108,Heri Utami,69,Lansia,0,Sedang
+109,Citra Susilo,39,Dewasa,0,Rendah
+110,Eva Widodo,35,Dewasa,0,Rendah
+111,Ida Hartono,25,Dewasa,0,Rendah
+112,Dodi Widodo,62,Lansia,0,Tinggi
+113,Citra Purnomo,38,Dewasa,0,Rendah
+114,Ida Wibowo,19,Remaja,0,Rendah
+115,Ida Sari,23,Dewasa,0,Rendah
+116,Joko Saputra,20,Dewasa,0,Rendah
+117,Feri Susilo,31,Dewasa,0,Rendah
+118,Joko Utami,46,Dewasa,0,Rendah
+119,Citra Sari,65,Lansia,0,Sedang
+120,Bina Saputra,71,Lansia,0,Tinggi
+121,Joko Wibowo,38,Dewasa,0,Rendah
+122,Joko Pratama,31,Dewasa,0,Rendah
+123,Dodi Utami,75,Lansia,0,Sedang
+124,Heri Purnomo,71,Lansia,0,Rendah
+125,Eva Susilo,21,Dewasa,0,Rendah
+126,Citra Hartono,72,Lansia,0,Rendah
+127,Ida Saputra,65,Lansia,0,Tinggi
+128,Gina Pratama,24,Dewasa,0,Rendah
+129,Heri Suharto,18,Remaja,0,Rendah
+130,Bina Pratama,19,Remaja,0,Rendah
+131,Eva Hartono,32,Dewasa,0,Rendah
+132,Gina Hartono,16,Remaja,0,Rendah
+133,Adi Purnomo,52,Dewasa,0,Rendah
+134,Gina Hartono,53,Dewasa,0,Rendah
+135,Dodi Saputra,38,Dewasa,0,Rendah
+136,Dodi Sari,32,Dewasa,0,Rendah
+137,Adi Pratama,60,Dewasa,0,Rendah
+138,Adi Susilo,63,Lansia,0,Tinggi
+139,Citra Widodo,21,Dewasa,0,Rendah
+140,Citra Sari,73,Lansia,0,Sedang
+141,Adi Widodo,72,Lansia,0,Tinggi
+142,Ida Widodo,49,Dewasa,0,Rendah
+143,Ida Hartono,65,Lansia,0,Rendah
+144,Eva Purnomo,24,Dewasa,0,Rendah
+145,Citra Wibowo,58,Dewasa,0,Sedang
+146,Gina Susilo,44,Dewasa,0,Sedang
+147,Adi Saputra,53,Dewasa,0,Tinggi
+148,Eva Purnomo,34,Dewasa,0,Tinggi
+149,Heri Pratama,32,Dewasa,0,Rendah
+150,Feri Pratama,65,Lansia,0,Tinggi
+151,Ani,25,Ibu Hamil,6,Sedang
+152,Evi,28,Ibu Hamil,4,Sedang
+153,Lilis,27,Ibu Hamil,5,Sedang
+154,Ocha,32,Ibu Hamil,3,Tinggi
+155,Indah,26,Ibu Hamil,7,Tinggi
+156,Wati,14,Remaja,0,Rendah
+157,Bunga,28,Ibu Hamil,5,Sedang
+158,Hesti,27,Ibu Hamil,6,Sedang
+159,Kartini,29,Ibu Hamil,8,Tinggi
+160,Umi,28,Ibu Hamil,5,Sedang
+161,Yulia,24,Ibu Hamil,3,Tinggi
+162,Qorin,25,Ibu Hamil,7,Tinggi
+163,Joko Utami,64,Lansia,0,Tinggi
+164,Heri Purnomo,19,Remaja,0,Sedang
+165,Citra Wibowo,74,Lansia,0,Tinggi
+166,Heri Utami,69,Lansia,0, Tinggi
+167,Citra Susilo,39,Dewasa,0,Rendah
+168,Eva Widodo,35,Dewasa,0,Rendah
+169,Ida Hartono,25,Dewasa,0,Rendah
+170,Dodi Widodo,62,Lansia,0,Tinggi
+171,Citra Purnomo,38,Dewasa,0,Rendah
+172,Ida Wibowo,19,Remaja,0,Rendah
+173,Ida Sari,23,Dewasa,0,Rendah
+174,Joko Saputra,20,Dewasa,0,Rendah
+175,Feri Susilo,31,Dewasa,0,Rendah
+176,Joko Utami,46,Dewasa,0,Rendah
+177,Citra Sari,65,Lansia,0,Tinggi
+178,Bina Saputra,71,Lansia,0,Tinggi
+179,Joko Wibowo,38,Dewasa,0,Rendah
+180,Joko Pratama,31,Dewasa,0,Rendah
+181,Dodi Utami,75,Lansia,0,Tinggi
+182,Heri Purnomo,71,Lansia,0,Rendah
+183,Eva Susilo,21,Dewasa,0,Rendah
+184,Citra Hartono,72,Lansia,0,Rendah
+185,Ida Saputra,65,Lansia,0,Tinggi
+186,Gina Pratama,24,Dewasa,0,Rendah
+187,Heri Suharto,18,Remaja,0,Rendah
+188,Bina Pratama,19,Remaja,0,Rendah
+189,Eva Hartono,32,Dewasa,0,Rendah
+190,Gina Hartono,16,Remaja,0,Rendah
+191,Adi Purnomo,52,Dewasa,0,Rendah
+192,Gina Hartono,53,Dewasa,0,Rendah
+193,Dodi Saputra,38,Dewasa,0,Rendah
+194,Dodi Sari,32,Dewasa,0,Rendah
+195,Adi Pratama,60,Dewasa,0,Rendah
+196,Adi Susilo,63,Lansia,0,Tinggi
+197,Citra Widodo,21,Dewasa,0,Rendah
+198,Citra Sari,73,Lansia,0,Tinggi
+199,Adi Widodo,72,Lansia,0,Tinggi
+200,Ida Widodo,49,Dewasa,0,Rendah
