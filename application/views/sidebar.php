@@ -72,11 +72,11 @@
                         <span>Tiket</span>
                     </a>
                     <ul class="submenu">
-                        <li class="submenu-item"><a href="" class="submenu-link">Ticket Received</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">List All Ticket</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">List Ticket Datin</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">List Ticket HSI</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">List Ticket Voice</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('List_ticket/list_approve') ?>" class="submenu-link">Ticket Received</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('List_ticket/index') ?>" class="submenu-link">List All Ticket</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('List_ticket/tiket_datin') ?>" class="submenu-link">List Ticket Datin</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('List_ticket/tiket_hsi') ?>" class="submenu-link">List Ticket HSI</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('List_ticket/tiket_voice') ?>" class="submenu-link">List Ticket Voice</a></li>
                     </ul>
                 </li>
                 <li class="sidebar-item has-sub">
@@ -85,9 +85,9 @@
                         <span>Produktivitas</span>
                     </a>
                     <ul class="submenu">
-                        <li class="submenu-item"><a href="" class="submenu-link">Produktivitas Teknisi</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">Produktivitas HD</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">Produktivitas TL</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('List_ticket/produktiv') ?>" class="submenu-link">Produktivitas Teknisi</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('List_ticket/produktiv_hd') ?>" class="submenu-link">Produktivitas HD</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('List_ticket/produktiv_tl') ?>" class="submenu-link">Produktivitas TL</a></li>
                     </ul>
                 </li>
 
@@ -97,11 +97,11 @@
                         <span>Data Management</span>
                     </a>
                     <ul class="submenu">
-                        <li class="submenu-item"><a href="" class="submenu-link">Divisi</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">Unit</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">Position</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">Naker</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">Sektor</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Departemen') ?>" class="submenu-link">Divisi</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Subdept') ?>" class="submenu-link">Unit</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Jabatan') ?>" class="submenu-link">Position</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Pegawai') ?>" class="submenu-link">Naker</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Lokasi') ?>" class="submenu-link">Sektor</a></li>
                     </ul>
                 </li>
 
@@ -111,30 +111,30 @@
                         <span>Konfigurasi</span>
                     </a>
                     <ul class="submenu">
-                        <li class="submenu-item"><a href="" class="submenu-link">User Account</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">Kategori</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">Sub Kategori</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link"></a>Priority</li>
-                        <li class="submenu-item"><a href="" class="submenu-link"></a>Informasi Umum</li>
+                        <li class="submenu-item"><a href="<?php echo site_url('User') ?>" class="submenu-link">User Account</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Kategori') ?>" class="submenu-link">Kategori</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Subkategori') ?>" class="submenu-link">Sub Kategori</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Kondisi') ?>" class="submenu-link"></a>Priority</li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Informasi') ?>" class="submenu-link"></a>Informasi Umum</li>
                     </ul>
                 </li>
 
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
+                    <a href="<?php echo site_url('Statistik') ?>" class="sidebar-link">
                         <i class="fa-solid fa-chart-simple"></i>
                         <span>Data Statistik</span>
                     </a>
                 </li>
                 
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
+                    <a href="<?php echo site_url('Absensi') ?>" class="sidebar-link">
                         <i class="fa-solid fa-calendar-days"></i>
                         <span>Absensi</span>
                     </a>
                 </li>
             <?php } else if ($this->session->userdata('level') == "Helpdesk") { ?>
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
+                    <a href="<?php echo site_url('List_ticket_hd/buat') ?>" class="sidebar-link">
                         <i class="fa-solid fa-plus"></i>
                         <span>Create Ticket</span>
                     </a>
@@ -151,8 +151,8 @@
                         <span>Tiket</span>
                     </a>
                     <ul class="submenu">
-                        <li class="submenu-item"><a href="" class="submenu-link">Tiket Received</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">List Ticket</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('List_ticket/list_approve') ?>" class="submenu-link">Tiket Received</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('List_ticket/index') ?>" class="submenu-link">List Ticket</a></li>
                     </ul>
                 </li>
                 <li class="sidebar-item has-sub">
@@ -161,11 +161,11 @@
                         <span>Data Management</span>
                     </a>
                     <ul class="submenu">
-                        <li class="submenu-item"><a href="" class="submenu-link">Divisi</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">Unit</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">Position</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">Naker</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">Sektor</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Departemen') ?>" class="submenu-link">Divisi</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Subdept') ?>" class="submenu-link">Unit</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Jabatan') ?>" class="submenu-link">Position</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Pegawai') ?>" class="submenu-link">Naker</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Lokasi') ?>" class="submenu-link">Sektor</a></li>
                     </ul>
                 </li>
 
@@ -175,16 +175,16 @@
                         <span>Konfigurasi</span>
                     </a>
                     <ul class="submenu">
-                        <li class="submenu-item"><a href="" class="submenu-link">User Account</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">Kategori</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link">Sub Kategori</a></li>
-                        <li class="submenu-item"><a href="" class="submenu-link"></a>Priority</li>
-                        <li class="submenu-item"><a href="" class="submenu-link"></a>Informasi Umum</li>
+                        <li class="submenu-item"><a href="<?php echo site_url('User') ?>" class="submenu-link">User Account</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Kategori') ?>" class="submenu-link">Kategori</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Subkategori') ?>" class="submenu-link">Sub Kategori</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Kondisi') ?>" class="submenu-link"></a>Priority</li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Informasi') ?>" class="submenu-link"></a>Informasi Umum</li>
                     </ul>
                 </li>
 
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
+                    <a href="<?php echo site_url('Statistik') ?>" class="sidebar-link">
                         <i class="fa-solid fa-chart-simple"></i>
                         <span>Data Statistik</span>
                     </a>
@@ -228,7 +228,6 @@
                     </a>
                 </li>
             <?php } ?>
-            
         </ul>
     </div>
 </div>

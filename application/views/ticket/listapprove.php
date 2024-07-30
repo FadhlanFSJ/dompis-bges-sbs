@@ -73,13 +73,13 @@
 										No Action
 									<?php } else if ($row->status == 1) { ?>
 										<a href="<?php echo site_url('List_ticket/detail_approve/'.$row->id_ticket)?>" class="btn btn-primary btn-circle btn-sm" title="Detail">
-											<i class="fas fa-search"></i>
+											<i class="bi bi-search"></i>
 										</a>
 										<a href="<?php echo site_url('List_ticket/setPriority/'.$row->id_ticket)?>" class="btn btn-info btn-circle btn-sm received" title="Received">
-											<i class="fas fa-check"></i>
+											<i class="bi bi-check"></i>
 										</a>
 										<a href="<?php echo site_url('List_ticket/detail_reject/'.$row->id_ticket)?>" class="btn btn-danger btn-circle btn-sm reject" title="Reject">
-											<i class="fas fa-times-circle"></i>
+											<i class="bi bi-alarm"></i>
 										</a>
 									<?php } else if ($row->status == 2) {?>
 										<a href="<?php echo site_url('List_ticket/detail_approve/'.$row->id_ticket)?>" class="btn btn-primary btn-circle btn-sm" title="Detail">
