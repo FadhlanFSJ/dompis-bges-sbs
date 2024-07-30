@@ -97,7 +97,7 @@
                         <span>Data Management</span>
                     </a>
                     <ul class="submenu">
-                        <li class="submenu-item"><a href="<?php echo site_url('Dashboard') ?>" class="submenu-link">Divisi</a></li>
+                        <li class="submenu-item"><a href="" class="submenu-link">Divisi</a></li>
                         <li class="submenu-item"><a href="" class="submenu-link">Unit</a></li>
                         <li class="submenu-item"><a href="" class="submenu-link">Position</a></li>
                         <li class="submenu-item"><a href="" class="submenu-link">Naker</a></li>
