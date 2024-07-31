@@ -13,12 +13,22 @@
                     <label for="end_date">End Date</label>
                     <input type="date" id="end_date" name="end_date" class="form-control mx-3" value="<?php echo $this->input->get('end_date'); ?>">
                 </div>
-                <button type="submit" class="btn btn-primary mx-sm-3">
-					<i class="fas fa-filter mr-1"></i>Filter
+                <button type="submit" class="btn btn-primary mx-3">
+					<i class="fas fa-filter"></i>Filter
 				</button>
 				<a href="<?php echo site_url('List_ticket'); ?>" class="btn btn-secondary">
-					<i class="fas fa-undo mr-1"></i>Reset
+					<i class="fas fa-undo"></i>Reset
 				</a>
+			<div class="btn-group dropdown ">
+                                <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split mx-3"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    data-reference="parent">
+                                    <span class="sr-only"><i class="bi bi-cloud-download-fill"></i></i> export </span>
+                                </button>
+				<div class="dropdown-menu">
+                                    <a class="dropdown-item active" href="<?php echo site_url('List_ticket/checkDataExport?start_date=' . $this->input->get('start_date') . '&end_date=' . $this->input->get('end_date')); ?>">EXCEL</a>
+                </div>
+             </div>
             </form>
         </div>
     </div>

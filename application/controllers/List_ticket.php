@@ -745,6 +745,100 @@ class List_ticket extends CI_Controller
         $data['listticket'] = $this->model_app->getTicketFilter($start_date, $end_date);
         $this->load->view('template', $data);
     }
+    public function checkDataExport(){
+        
+        $start_date     = $this->input->get('start_date');
+        $end_date       = $this->input->get('end_date');
+
+    if($start_date && $end_date){
+        $data['allticket'] = $this->model_app->getTicketFilter($start_date, $end_date);
+    }else{
+        $data['allticket'] = $this->model_app->all_ticket()->result();
+    }
+    $this->exportexcel($data['allticket']);
+    }
+    
+    public function exportexcel($allticket){
+
+        require(APPPATH. 'PHPExcel-v7.4-master/PHPExcel.php');
+        require(APPPATH. 'PHPExcel-v7.4-master/PHPExcel/Writer/Excel2007.php');
+
+        $object = new PHPExcel();
+
+        $object->getProperties()->setCreator("CCAN");
+        $object->getProperties()->setLastModifiedBy("CCAN");
+
+        $object->getProperties()->setTitle("laporan Ticket");
+
+        $object->setActiveSheetIndex(0);
+        
+        $object->getActiveSheet()->setCellValue('A1', 'NO');
+        $object->getActiveSheet()->setCellValue('B1', 'NO TIKET');
+        $object->getActiveSheet()->setCellValue('C1', 'PRORITY');
+        $object->getActiveSheet()->setCellValue('D1', 'WAKTU OPEN');
+        $object->getActiveSheet()->setCellValue('E1', 'MAX TTR');
+        $object->getActiveSheet()->setCellValue('F1', 'SUB CATEGORY');
+        $object->getActiveSheet()->setCellValue('G1', 'SO');
+        $object->getActiveSheet()->setCellValue('H1', 'SID/INET/NOTEL');
+        $object->getActiveSheet()->setCellValue('I1', 'LAST UPDATE');
+        $object->getActiveSheet()->setCellValue('J1', 'DURASI');
+        $object->getActiveSheet()->setCellValue('K1', 'TEKNISI');
+        $object->getActiveSheet()->setCellValue('L1', 'STATUS');
+
+        $baris = 2;
+        $no = 1;
+
+        foreach ($allticket as $at){
+            if ($at->status == 0) {
+                $at->statusticket = "ticket rejected";
+            } else if ($at->status == 1) {
+                $at->statusticket = "ticket submitted";
+            } else if ($at->status == 2) {
+                $at->statusticket = "category changed";
+            } else if ($at->status == 3) {
+                $at->statusticket = "Assigned to Technician";
+            } else if ($at->status == 4) {
+                $at->statusticket = "On Progress";
+            } else if ($at->status == 5) {
+                $at->statusticket = "Pending";
+            } else if ($at->status == 6) {
+                $at->statusticket = "Comply";
+            } else if ($at->status == 7) {
+                $at->statusticket = "Not Comply";
+            }
+
+        $object->getActiveSheet()->setCellValue('A'.$baris, $no++);
+        $object->getActiveSheet()->setCellValue('B'.$baris, $at->id_ticket);
+        $object->getActiveSheet()->setCellValue('C'.$baris, $at->nama_kondisi);
+        $object->getActiveSheet()->setCellValue('D'.$baris, $at->tanggal);
+        $object->getActiveSheet()->setCellValue('E'.$baris, $at->deadline);
+        $object->getActiveSheet()->setCellValue('F'.$baris, $at->nama_sub_kategori);
+        $object->getActiveSheet()->setCellValue('G'.$baris, $at->lokasi);
+        $object->getActiveSheet()->setCellValue('H'.$baris, $at->problem_summary);
+        $object->getActiveSheet()->setCellValue('I'.$baris, $at->tanggal_solved);
+        $object->getActiveSheet()->setCellValue('J'.$baris, gmdate("H:i:s", $at->durasi_waktu));
+        $object->getActiveSheet()->setCellValue('K'.$baris, $at->nama_teknisi);
+        $object->getActiveSheet()->setCellValue('L'.$baris, $at->statusticket);
+
+        $baris++;
+        }
+        $filename="Data_ticket.xlsx";
+
+        $object->getActiveSheet()->setTitle("laporan Ticket");
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'.$filename. '"');
+        header('Cache-Control: max-age=0');
+        header('Expires: 0');
+        header('Pragma: public');
+
+        $writer=PHPExcel_IOFactory::createwriter($object, 'Excel2007');
+        $writer->save('php://output');
+
+        exit;
+
+
+    }
 }
 
     /**
