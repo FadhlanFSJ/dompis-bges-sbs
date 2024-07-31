@@ -1,47 +1,61 @@
 <script language="javascript" type="text/javascript">
 	$(document).ready(function() {
 		$("#id_kondisi").change(function() {
-		// Put an animated GIF image insight of content	 		
-		var data = {
-			id_kondisi: $("#id_kondisi").val()
-		};
-		$.ajax({
-			type: "POST",
-			url: "<?php echo site_url('Select/select_kondisi') ?>",
-			data: data,
-			success: function(msg) {
-				$('#div-order').html(msg);
-			}
+			// Put an animated GIF image inside of content
+			var data = {
+				id_kondisi: $("#id_kondisi").val()
+			};
+			$.ajax({
+				type: "POST",
+				url: "<?php echo site_url('Select/select_kondisi') ?>",
+				data: data,
+				success: function(msg) {
+					$('#div-order').html(msg);
+				}
+			});
 		});
-	});
-
 	});
 </script>
 
 <script language="javascript" type="text/javascript">
 	$(document).ready(function() {
-		$("#id_teknisi").change(function() {
-		// Put an animated GIF image insight of content	 		
-		var data = {
-			id_teknisi: $("#id_teknisi").val()
-		};
-		$.ajax({
-			type: "POST",
-			url: "<?php echo site_url('Select/select_job') ?>",
-			data: data,
-			success: function(msg) {
-				$('#div-order2').html(msg);
-			}
+		$("#id_teknisi1").change(function() {
+			// Put an animated GIF image inside of content
+			var data = {
+				id_teknisi: $("#id_teknisi1").val()
+			};
+			$.ajax({
+				type: "POST",
+				url: "<?php echo site_url('Select/select_job') ?>",
+				data: data,
+				success: function(msg) {
+					$('#div-order2').html(msg);
+				}
+			});
 		});
-	});
-
+		
+		$("#id_teknisi2").change(function() {
+			// Put an animated GIF image inside of content
+			var data = {
+				id_teknisi: $("#id_teknisi2").val()
+			};
+			$.ajax({
+				type: "POST",
+				url: "<?php echo site_url('Select/select_job') ?>",
+				data: data,
+				success: function(msg) {
+					$('#div-order3').html(msg);
+				}
+			});
+		});
 	});
 </script>
 
 <div class="container-fluid">
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 		<h1 class="h3 mb-0 text-gray-800">Set Priority and Teknisi (<?php echo $detail['id_ticket']?>)</h1>
-	</div><hr>
+	</div>
+	<hr>
 
 	<?php echo form_error('id_kondisi'); ?>
 	<?php echo form_error('id_teknisi'); ?>
@@ -64,54 +78,68 @@
 						</a><br>
 						Click to download
 					<?php } else {?>
-						<a data-fancybox="gallery"  href="<?php echo base_url('uploads/'.$detail['filefoto']) ?>">
+						<a data-fancybox="gallery" href="<?php echo base_url('uploads/'.$detail['filefoto']) ?>">
 							<img src="<?php echo base_url('uploads/'.$detail['filefoto']) ?>" style="width:100%;max-width:300px">
 						</a><br>
 						Click to zoom
 					<?php }?>
-				</div><hr>
+				</div>
+				<hr>
 				<h6 class="m-0 font-weight-bold text-primary">Divisi</h6>
 				<div class="font-weight-bold">
-					<?php echo $detail['nama_dept']." (".$detail['nama_bagian_dept'].")" ?><p></p>
-				</div><hr>
+					<?php echo $detail['nama_dept']." (".$detail['nama_bagian_dept'].")" ?>
+					<p></p>
+				</div>
+				<hr>
 				<h6 class="m-0 font-weight-bold text-primary">Position</h6>
 				<div class="font-weight-bold">
 					<?php echo $detail['nama_jabatan'] ?><br>
-				</div><hr>
+				</div>
+				<hr>
 				<h6 class="m-0 font-weight-bold text-primary">Kategori</h6>
 				<div class="font-weight-bold">
-					<?php echo $detail['nama_kategori']." (".$detail['nama_sub_kategori'].")" ?><p></p>
-				</div><hr>
+					<?php echo $detail['nama_kategori']." (".$detail['nama_sub_kategori'].")" ?>
+					<p></p>
+				</div>
+				<hr>
 				<h6 class="m-0 font-weight-bold text-primary">Email</h6>
 				<div class="font-weight-bold">
-					<?php echo $detail['email'] ?><p></p>
-				</div><hr>
+					<?php echo $detail['email'] ?>
+					<p></p>
+				</div>
+				<hr>
 				<h6 class="m-0 font-weight-bold text-primary">SO</h6>
 				<div class="font-weight-bold">
-					<?php echo $detail['lokasi'] ?><p></p>
-				</div><hr>
+					<?php echo $detail['lokasi'] ?>
+					<p></p>
+				</div>
+				<hr>
 
 				<h6 class="m-0 font-weight-bold text-primary">SID/INET/NOTEL</h6>
 				<div class="font-weight-bold">
-					<?php echo $detail['problem_summary'] ?><p></p>
-				</div><hr>
+					<?php echo $detail['problem_summary'] ?>
+					<p></p>
+				</div>
+				<hr>
 				<h6 class="m-0 font-weight-bold text-primary">Description</h6>
 				<div class="font-weight-bold">
 					<?php echo nl2br($detail['problem_detail']) ?>
-				</div><hr>
+				</div>
+				<hr>
 
 				<div class="form-group">
 					<label class="m-0 font-weight-bold text-primary">Priority</label>
-					<?php echo form_dropdown('id_kondisi',$dd_kondisi, $id_kondisi, ' id="id_kondisi" class="form-control"');?>
+					<?php echo form_dropdown('id_kondisi', $dd_kondisi, $id_kondisi, ' id="id_kondisi" class="form-control"'); ?>
 				</div>
 
 				<div class="form-group">
 					<div id="div-order"></div>
-				</div><hr>
+				</div>
+				<hr>
 
 				<h6 class="m-0 font-weight-bold text-primary">Choose Technician</h6>
 				<div class="form-group">
-					<?php echo form_dropdown('id_teknisi', $dd_teknisi, $id_teknisi, 'id="id_teknisi" class="form-control"'); ?>
+					<?php echo form_dropdown('id_teknisi1', $dd_teknisi, $id_teknisi, 'id="id_teknisi1" class="form-control"'); ?>
 					<br>
 					<div>
 						<div class="col-lg-9">
@@ -119,8 +147,26 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-group">
+					<div id="div-order"></div>
+				</div>
+				<hr>
+
+				<h6 class="m-0 font-weight-bold text-primary">Choose Technician 2</h6>
+				<div class="form-group">
+					<?php echo form_dropdown('id_teknisi2', $dd_teknisi, $id_teknisi, 'id="id_teknisi2" class="form-control"'); ?>
+					<br>
+					<div>
+						<div class="col-lg-9">
+							<div id="div-order3"></div>
+						</div>
+					</div>
+				</div>
+
 				<button type="submit" class="btn btn-primary">Submit</button>
-				<button type="button" class="btn btn-danger" onclick="window.location='<?php echo site_url('List_ticket/list_approve') ?>'">Cancel</button><p>
+				<button type="button" class="btn btn-danger" onclick="window.location='<?php echo site_url('List_ticket/list_approve') ?>'">Cancel</button>
+				<p>
 			</div>
 		</div>
 	</form>

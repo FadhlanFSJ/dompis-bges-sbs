@@ -486,7 +486,14 @@ class List_ticket extends CI_Controller
             )
         );
 
-        $this->form_validation->set_rules('id_teknisi', 'Id_teknisi', 'required',
+        $this->form_validation->set_rules('id_teknisi1', 'Id_teknisi1', 'required',
+            array(
+                'required' => '<div class="alert alert-danger alert-dismissable">
+                                    <strong>Gagal!</strong> Silahkan pilih Teknisi.
+                               </div>'
+            )
+        );
+        $this->form_validation->set_rules('id_teknisi2', 'Id_teknisi2', 'required',
             array(
                 'required' => '<div class="alert alert-danger alert-dismissable">
                                     <strong>Gagal!</strong> Silahkan pilih Teknisi.

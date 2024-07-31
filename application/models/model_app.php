@@ -370,7 +370,8 @@ class Model_app extends CI_Model
           'deadline'   => date('Y-m-d H:i:s', strtotime($date. ' + '.$date2.' minutes')),
           'status'     => 3,
           'last_update'=> date("Y-m-d  H:i:s"),
-          'teknisi'    => $this->input->post('id_teknisi')
+          'teknisi'    => $this->input->post('id_teknisi1'),
+          'teknisi_2'  => $this->input->post('id_teknisi2')
         );
 
         //Melakukan insert data tracking ticket bahwa ticket di-approve oleh admin, data tracking ke dalam array '$datatracking' yang nanti akan di-insert dengan query
@@ -729,7 +730,7 @@ class Model_app extends CI_Model
                                    LEFT JOIN sub_kategori B ON B.id_sub_kategori = A.id_sub_kategori
                                    LEFT JOIN kategori C ON C.id_kategori = B.id_kategori
                                    LEFT JOIN karyawan D ON D.nik = A.reported
-                                   LEFT JOIN user E ON E.username = A.teknisi
+                                   LEFT JOIN user E ON E.username = A.teknisi OR A.teknisi_2
                                    LEFT JOIN karyawan F ON F.nik = E.username
                                    LEFT JOIN kondisi G ON G.id_kondisi = A.id_kondisi
                                    LEFT JOIN lokasi H ON H.id_lokasi = A.id_lokasi
@@ -1563,10 +1564,21 @@ public function get_total_records_gaul_voice() {
     //Method untuk mengambil data teknisi dan jumlah tugasnya pada halaman PRODUKTIVITAS TEKNISI berdasarkan tiap bulan
     public function getTeknisi_pro()
     {
-        $query = $this->db->query("SELECT A.id_user, B.nama, B.nik, SUM(C.status IN (6,7)) as total FROM user A 
+        $query = $this->db->query("SELECT A.id_user, B.nama, B.nik, COALESCE(T1.total_teknisi, 0) + COALESCE(T2.total_teknisi_2, 0) AS total FROM user A
                                     LEFT JOIN karyawan B ON B.nik = A.username 
-                                    LEFT JOIN ticket C ON C.teknisi = B.nik 
-                                    WHERE A.level = 'technician' AND MONTH(tanggal)=MONTH(CURRENT_DATE) 
+                                    LEFT JOIN (
+                                        SELECT teknisi, COUNT(*) AS total_teknisi
+                                        FROM ticket
+                                        WHERE status IN (6, 7) AND MONTH(tanggal) = MONTH(CURRENT_DATE)
+                                        GROUP BY teknisi
+                                    ) T1 ON T1.teknisi = B.nik
+                                    LEFT JOIN (
+                                        SELECT teknisi_2, COUNT(*) AS total_teknisi_2
+                                        FROM ticket
+                                        WHERE status IN (6, 7) AND MONTH(tanggal) = MONTH(CURRENT_DATE)
+                                        GROUP BY teknisi_2
+                                    ) T2 ON T2.teknisi_2 = B.nik
+                                    WHERE A.level = 'technician' 
                                     GROUP BY B.nama ");
         return $query;
     }
