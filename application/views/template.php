@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="<?php echo base_url('/assets/compiled/css/app.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('/assets/compiled/css/app-dark.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('/assets/compiled/css/iconly.css') ?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/extension/@fontawesome/fontawesome-free/all.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('/assets/extension/@fontawesome/fontawesome-free/all.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('/assets/extensions/simple-datatables/style.css') ?>">
+    <link rel="stylesheet" crossorigin href="<?php echo base_url('/assets/compiled/css/table-datatable.css') ?>">
+    <script src="<?php echo base_url('assets/extensions/jquery/jquery.js') ?>"></script>
 </head>
 <body>
     <script src="<?php echo base_url('/assets/static/js/initTheme.js') ?>"></script>
@@ -51,18 +54,19 @@
     </div>
 
     <!-- Scripts -->
-    <script src="<?php echo base_url('assets/extensions/jquery/jquery.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/static/js/components/dark.js') ?>"></script>
     <script src="<?php echo base_url('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/extensions/@fontawesome/fontawesome-free/js/all.js') ?>"></script>
-    
+    <script src="<?php echo base_url('assets/extensions/simple-datatables/umd/simple-datatables.js') ?>"></script>
+    <script src="<?php echo base_url('assets/static/js/pages/simple-datatables.js') ?>"></script>
     <script src="<?php echo base_url('assets/compiled/js/app.js') ?>"></script>
     <!-- Need: Apexcharts -->
     <script src="<?php echo base_url('assets/extensions/apexcharts/apexcharts.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/static/js/pages/dashboard.js') ?>"></script>
     
+    <!-- Load jQuery dan plugins lainnya yang Anda butuhkan sekali saja -->
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <!-- Pastikan tidak ada pemanggilan ganda jQuery -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="<?php echo base_url('assets/extensions/datatables.net/jquery.dataTables.min.js') ?>"></script>
