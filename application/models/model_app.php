@@ -353,43 +353,48 @@ class Model_app extends CI_Model
 
     //Method yang digunakan untuk proses approve ticket dengan parameter (id_ticket)
     public function approve($id)
-    {
-        $kondisi    = $this->input->post('id_kondisi');
-        $sql        = $this->db->query("SELECT tanggal FROM ticket WHERE id_ticket = '$id'")->row();
-        $sql2       = $this->db->query("SELECT nama_kondisi FROM kondisi WHERE id_kondisi = '$kondisi'")->row();
-        //Data
-        $prio       = $sql2->nama_kondisi;
-        $date       = $sql->tanggal;
-        $date2      = $this->input->post('waktu_respon');
-        //Mengambil session admin
-        $id_user    = $this->session->userdata('id_user');
+{
+    $kondisi = $this->input->post('id_kondisi');
+    $sql = $this->db->query("SELECT tanggal FROM ticket WHERE id_ticket = '$id'")->row();
+    $sql2 = $this->db->query("SELECT nama_kondisi FROM kondisi WHERE id_kondisi = '$kondisi'")->row();
+    // Data
+    $prio = $sql2->nama_kondisi;
+    $date = $sql->tanggal;
+    $date2 = $this->input->post('waktu_respon');
+    // Mengambil session admin
+    $id_user = $this->session->userdata('id_user');
 
-        //Melakukan update data ticket dengan mengubah status ticket menjadi 2, data ditampung ke dalam array '$data' yang nanti akan diupdate dengan query
-        $data = array(
-          'id_kondisi' => $kondisi,
-          'deadline'   => date('Y-m-d H:i:s', strtotime($date. ' + '.$date2.' minutes')),
-          'status'     => 3,
-          'last_update'=> date("Y-m-d  H:i:s"),
-          'teknisi'    => $this->input->post('id_teknisi1'),
-          'teknisi_2'  => $this->input->post('id_teknisi2')
-        );
+    // Default data array with teknisi_2 set as null
+    $data = array(
+        'id_kondisi' => $kondisi,
+        'deadline' => date('Y-m-d H:i:s', strtotime($date . ' + ' . $date2 . ' minutes')),
+        'status' => 3,
+        'last_update' => date("Y-m-d H:i:s"),
+        'teknisi' => $this->input->post('id_teknisi1')
+    );
 
-        //Melakukan insert data tracking ticket bahwa ticket di-approve oleh admin, data tracking ke dalam array '$datatracking' yang nanti akan di-insert dengan query
-        $datatracking = array(
-          'id_ticket'  => $id,
-          'tanggal'    => date("Y-m-d  H:i:s"),
-          'status'     => "Ticket Received",
-          'deskripsi'  => "Priority of the tiket is set to ".$prio." and assigned to Teknisi.",
-          'id_user'    => $id_user
-        );
-
-        //Query untuk melakukan update data ticket sesuai dengan array '$data' ke tabel ticket
-        $this->db->where('id_ticket', $id);
-        $this->db->update('ticket', $data);
-
-        //Query untuk melakukan insert data tracking ticket sesuai dengan array '$datatracking' ke tabel tracking
-        $this->db->insert('tracking', $datatracking);
+    // If teknisi_2 is provided, add it to the data array
+    $teknisi2 = $this->input->post('id_teknisi2');
+    if (!empty($teknisi2)) {
+        $data['teknisi_2'] = $teknisi2;
     }
+
+    // Melakukan insert data tracking ticket bahwa ticket di-approve oleh admin
+    $datatracking = array(
+        'id_ticket' => $id,
+        'tanggal' => date("Y-m-d H:i:s"),
+        'status' => "Ticket Received",
+        'deskripsi' => "Priority of the ticket is set to " . $prio . " and assigned to Teknisi.",
+        'id_user' => $id_user
+    );
+
+    // Query untuk melakukan update data ticket sesuai dengan array '$data' ke tabel ticket
+    $this->db->where('id_ticket', $id);
+    $this->db->update('ticket', $data);
+
+    // Query untuk melakukan insert data tracking ticket sesuai dengan array '$datatracking' ke tabel tracking
+    $this->db->insert('tracking', $datatracking);
+}
 
     //Method untuk menaruh data user teknisi sesuai dengan kategori yang dipilih pada dropdown
     function dropdown_teknisi()
