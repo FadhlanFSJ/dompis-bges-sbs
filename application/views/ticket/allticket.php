@@ -30,6 +30,16 @@
                 </div>
              </div>
             </form>
+			<div class="dropdown">
+                <button class="btn btn-warning dropdown-toggle me-1" type="button"
+						id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">
+						Export
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton5">
+						<a class="dropdown-item" href="<?php echo site_url('List_ticket/checkDateExport?start_date=' . $this->input->get('start_date') . '&end_date=' . $this->input->get('end_date')); ?>">Excel</a>
+                    </div>
+				</div>
         </div>
     </div>
 

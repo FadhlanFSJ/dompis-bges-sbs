@@ -493,13 +493,6 @@ class List_ticket extends CI_Controller
                                </div>'
             )
         );
-        $this->form_validation->set_rules('id_teknisi2', 'Id_teknisi2', 'required',
-            array(
-                'required' => '<div class="alert alert-danger alert-dismissable">
-                                    <strong>Gagal!</strong> Silahkan pilih Teknisi.
-                               </div>'
-            )
-        );
 
         if($this->form_validation->run() == FALSE){
             if($this->session->userdata('level') == "Admin"){
@@ -745,100 +738,104 @@ class List_ticket extends CI_Controller
         $data['listticket'] = $this->model_app->getTicketFilter($start_date, $end_date);
         $this->load->view('template', $data);
     }
-    public function checkDataExport(){
-        
-        $start_date     = $this->input->get('start_date');
-        $end_date       = $this->input->get('end_date');
 
-    if($start_date && $end_date){
-        $data['allticket'] = $this->model_app->getTicketFilter($start_date, $end_date);
-    }else{
-        $data['allticket'] = $this->model_app->all_ticket()->result();
-    }
-    $this->exportexcel($data['allticket']);
-    }
-    
-    public function exportexcel($allticket){
+    public function checkDateExport(){
+        $start_date = $this->input->get('start_date');
+        $end_date = $this->input->get('end_date');
 
-        require(APPPATH. 'PHPExcel-v7.4-master/PHPExcel.php');
-        require(APPPATH. 'PHPExcel-v7.4-master/PHPExcel/Writer/Excel2007.php');
-
-        $object = new PHPExcel();
-
-        $object->getProperties()->setCreator("CCAN");
-        $object->getProperties()->setLastModifiedBy("CCAN");
-
-        $object->getProperties()->setTitle("laporan Ticket");
-
-        $object->setActiveSheetIndex(0);
-        
-        $object->getActiveSheet()->setCellValue('A1', 'NO');
-        $object->getActiveSheet()->setCellValue('B1', 'NO TIKET');
-        $object->getActiveSheet()->setCellValue('C1', 'PRORITY');
-        $object->getActiveSheet()->setCellValue('D1', 'WAKTU OPEN');
-        $object->getActiveSheet()->setCellValue('E1', 'MAX TTR');
-        $object->getActiveSheet()->setCellValue('F1', 'SUB CATEGORY');
-        $object->getActiveSheet()->setCellValue('G1', 'SO');
-        $object->getActiveSheet()->setCellValue('H1', 'SID/INET/NOTEL');
-        $object->getActiveSheet()->setCellValue('I1', 'LAST UPDATE');
-        $object->getActiveSheet()->setCellValue('J1', 'DURASI');
-        $object->getActiveSheet()->setCellValue('K1', 'TEKNISI');
-        $object->getActiveSheet()->setCellValue('L1', 'STATUS');
-
-        $baris = 2;
-        $no = 1;
-
-        foreach ($allticket as $at){
-            if ($at->status == 0) {
-                $at->statusticket = "ticket rejected";
-            } else if ($at->status == 1) {
-                $at->statusticket = "ticket submitted";
-            } else if ($at->status == 2) {
-                $at->statusticket = "category changed";
-            } else if ($at->status == 3) {
-                $at->statusticket = "Assigned to Technician";
-            } else if ($at->status == 4) {
-                $at->statusticket = "On Progress";
-            } else if ($at->status == 5) {
-                $at->statusticket = "Pending";
-            } else if ($at->status == 6) {
-                $at->statusticket = "Comply";
-            } else if ($at->status == 7) {
-                $at->statusticket = "Not Comply";
-            }
-
-        $object->getActiveSheet()->setCellValue('A'.$baris, $no++);
-        $object->getActiveSheet()->setCellValue('B'.$baris, $at->id_ticket);
-        $object->getActiveSheet()->setCellValue('C'.$baris, $at->nama_kondisi);
-        $object->getActiveSheet()->setCellValue('D'.$baris, $at->tanggal);
-        $object->getActiveSheet()->setCellValue('E'.$baris, $at->deadline);
-        $object->getActiveSheet()->setCellValue('F'.$baris, $at->nama_sub_kategori);
-        $object->getActiveSheet()->setCellValue('G'.$baris, $at->lokasi);
-        $object->getActiveSheet()->setCellValue('H'.$baris, $at->problem_summary);
-        $object->getActiveSheet()->setCellValue('I'.$baris, $at->tanggal_solved);
-        $object->getActiveSheet()->setCellValue('J'.$baris, gmdate("H:i:s", $at->durasi_waktu));
-        $object->getActiveSheet()->setCellValue('K'.$baris, $at->nama_teknisi);
-        $object->getActiveSheet()->setCellValue('L'.$baris, $at->statusticket);
-
-        $baris++;
+        if ($start_date && $end_date) {
+            $data['listticket'] = $this->model_app->getTicketFilter($start_date, $end_date); // Fetch filtered data
+        } else {
+            $data['listticket'] = $this->model_app->all_ticket()->result(); // Fetch all data
         }
-        $filename="Data_ticket.xlsx";
-
-        $object->getActiveSheet()->setTitle("laporan Ticket");
-
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="'.$filename. '"');
-        header('Cache-Control: max-age=0');
-        header('Expires: 0');
-        header('Pragma: public');
-
-        $writer=PHPExcel_IOFactory::createwriter($object, 'Excel2007');
-        $writer->save('php://output');
-
-        exit;
-
-
+        $this->exportToExcel($data['listticket']);
     }
+
+    public function exportToExcel($listticket)
+{
+    // Load PhpSpreadsheet library
+    require(FCPATH . 'vendor/autoload.php');
+    
+    // Fully qualified class names
+    $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+    
+    $sheet->setCellValue('A1', 'NO');
+    $sheet->setCellValue('B1', 'NO TICKET');
+    $sheet->setCellValue('C1', 'PRIORITY');
+    $sheet->setCellValue('D1', 'WAKTU OPEN');
+    $sheet->setCellValue('E1', 'MAX TTR');
+    $sheet->setCellValue('F1', 'SUB CATEGORY');
+    $sheet->setCellValue('G1', 'SO');
+    $sheet->setCellValue('H1', 'SID/INET/NOTEL');
+    $sheet->setCellValue('I1', 'LAST UPDATE');
+    $sheet->setCellValue('J1', 'DURASI');
+    $sheet->setCellValue('K1', 'TEKNISI');
+    $sheet->setCellValue('L1', 'STATUS');
+
+    $row = 2;
+    $no = 1;
+
+    foreach ($listticket as $dt) {
+        switch ($dt->status) {
+            case 0:
+                $dt->statusMessage = "Ticket Rejected";
+                break;
+            case 1:
+                $dt->statusMessage = "Ticket Submitted";
+                break;
+            case 2:
+                $dt->statusMessage = "Category Changed";
+                break;
+            case 3:
+                $dt->statusMessage = "Assigned to Technician";
+                break;
+            case 4:
+                $dt->statusMessage = "On Progress";
+                break;
+            case 5:
+                $dt->statusMessage = "Pending";
+                break;
+            case 6:
+                $dt->statusMessage = "Comply";
+                break;
+            case 7:
+                $dt->statusMessage = "Not Comply";
+                break;
+            default:
+                $dt->statusMessage = "Unknown";
+        }
+
+        $sheet->setCellValue('A' . $row, $no++);
+        $sheet->setCellValue('B' . $row, $dt->id_ticket);
+        $sheet->setCellValue('C' . $row, $dt->id_kondisi);
+        $sheet->setCellValue('D' . $row, $dt->tanggal);
+        $sheet->setCellValue('E' . $row, $dt->deadline);
+        $sheet->setCellValue('F' . $row, $dt->nama_sub_kategori);
+        $sheet->setCellValue('G' . $row, $dt->lokasi);
+        $sheet->setCellValue('H' . $row, $dt->problem_summary);
+        $sheet->setCellValue('I' . $row, $dt->last_update);
+        $sheet->setCellValue('J' . $row, gmdate("H:i:s", $dt->durasi_waktu));
+        $sheet->setCellValue('K' . $row, $dt->teknisi);
+        $sheet->setCellValue('L' . $row, $dt->statusMessage);
+
+        $row++;
+    }
+
+    $filename = "DataTicket.xlsx";
+
+    // Set the response headers and output the file
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment;filename="' . $filename . '"');
+    header('Cache-Control: max-age=0');
+    header('Expires: 0');
+    header('Pragma: public');
+
+    $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+    $writer->save('php://output');
+    exit;
+}
+
 }
 
     /**
