@@ -836,7 +836,6 @@ class List_ticket extends CI_Controller
     exit;
 }
 
-
 }
 
     /**
