@@ -846,7 +846,6 @@ class List_ticket extends CI_Controller
         }
 
         $filename = "DataTicket.xlsx";
-
         // Set the response headers and output the file
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
