@@ -27,7 +27,7 @@
 								<td><?php echo $row->nama?></td>
 								<td><?php echo $row->total?></td>
 								<td>
-									<a href="<?php echo site_url('List_ticket/index_tugas')?>" class="btn btn-primary btn-circle btn-sm" title="Detail">
+									<a href="<?php echo site_url('List_ticket/index_tugas/'. $row->nik)?>" class="btn btn-primary btn-circle btn-sm" title="Detail">
 										<i class="fas fa-search"></i>
 									</a>
 								</td>

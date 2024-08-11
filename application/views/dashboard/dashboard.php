@@ -126,7 +126,7 @@
 					</div>
 					<div class="card-body" style="overflow-x: scroll; height: 390px;">
 						<div class="table-responsive-sm">
-						<table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
+						<table class="table table-striped" id="table1" width="100%" cellspacing="0">
 					<thead>
 						<tr>
 							<th>#</th>
@@ -311,7 +311,7 @@
 					<!-- Card Body -->
 					<div class="card-body">
 						<div class="chart-area">
-							<canvas id="myAreaChart"></canvas>
+							<div id="line"></div>
 						</div>
 					</div>
 				</div>
@@ -345,7 +345,7 @@
 					<!-- Card Body -->
 					<div class="card-body">
 						<div class="chart-area">
-							<canvas id="myBarChart"></canvas>
+							<canvas id="bar"></canvas>
 						</div>
 					</div>
 				</div>
@@ -371,6 +371,34 @@
 
 		<?php
 	}else if ($this->session->userdata('level') == "Technician") { ?>
+			<?php if($absensi == 'belum_absen') { ?>
+				<script type="text/javascript">
+					$(document).ready(function(){
+						Swal.fire({
+						title: 'Absensi Diperlukan',
+						text: 'Silahkan melakukan absensi!',
+						icon: 'warning',
+						// showCancelButton: false,
+						confirmButtonText: 'Absen Sekarang'
+					}).then((result) => {
+						if (result.isConfirmed) {
+							// Redirect ke halaman absensi atau lakukan aksi absensi lainnya
+							window.location.href = '<?= site_url('Dashboard/Kehadiran') ?>';
+						}
+					});
+					})
+				</script>
+			<?php } else if ($absensi == 'sudah_absen') { ?>
+				<script>
+					$(document).ready(function(){
+						Toast.fire({
+							icon: 'success',
+							title: 'Anda telah melakukan Absensi, Selamat Kerja!'
+						});
+					})
+					
+				</script>
+			<?php } ?>
 		<div class="container-fluid">
 			<div class="d-sm-flex align-items-center justify-content-between mb-4">
 				<h1 class="h3 mb-0 text-gray-800">DASHBOARD</h1>
@@ -393,7 +421,7 @@
 								<a href="<?php echo site_url('Dashboard/detail_datin') ?>"><button class="btn btn-primary-datin	">More Info <i class="fa fa-caret-right"></i></button></a>	
 							</div>
 							<div class="col-auto">
-								<i class="fas fa-star fa-2x"></i>
+								<i class="bi bi-star fs-2"></i>
 							</div>
 						</div>
 					</div>
@@ -604,6 +632,7 @@
 				</div>
 			</div>
 		</div>
+		
 		</div>
 
 		
@@ -703,7 +732,7 @@
 								<a href="<?php echo site_url('Dashboard/detail_datin') ?>"><button class="btn btn-primary-datin	">More Info <i class="fa fa-caret-right"></i></button></a>	
 							</div>
 							<div class="col-auto">
-								<i class="fas fa-star fa-2x"></i>
+								<i class="bi bi-star fs-2"></i>
 							</div>
 						</div>
 					</div>
@@ -1145,7 +1174,7 @@
 
 <script type="text/javascript">
 	window.onload = function() {
-		var Bar = document.getElementById("myBarChart");
+		var Bar = document.getElementById("bar");
 		var chart = new Chart(Bar, {
 			type: 'horizontalBar',
 			data: {
@@ -1191,7 +1220,7 @@
 			}
 		});
 
-		var Line = document.getElementById("myAreaChart");
+		var Line = document.getElementById("line");
 		var myLineChart = new Chart(Line, {
 			type: 'line',
 			data: {

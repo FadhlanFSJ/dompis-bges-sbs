@@ -53,8 +53,11 @@
 							<th>SO</th>
 							<th>SID/INET/NOTEL</th>
 							<th>Last Update</th>
+							<th>RCA</th>
+							<th>RFO</th>
 							<th>Durasi</th>
 							<th>Teknisi</th>
+							<th>Teknisi 2</th>
 							<th>Status</th>
 							<th>Action</th>
 						</tr>
@@ -80,6 +83,8 @@
 								<td><?php echo $row->lokasi?></td>
 								<td><?php echo $row->problem_summary?></td>
 								<td><?php echo $row->last_update?></td>
+								<td><?php echo $row->rca ?></td>
+								<td><?php echo $row->rfo ?></td>
 								<td><?php echo gmdate("H:i:s", $row->durasi_waktu)?></td>
 								<td style="text-align: center">
 								    <?php if($row->status == 0) {
@@ -89,6 +94,17 @@
 								    		echo "Not set yet";
 								    	} else {
 								    		echo "$row->nama_teknisi";
+								    	}
+								    } ?>
+								</td>
+								<td style="text-align: center">
+								    <?php if($row->status == 0) {
+								    	echo "Rejected";
+								    } else {
+								    	if($row->teknisi == NULL){
+								    		echo "Not set yet";
+								    	} else {
+								    		echo "$row->nama_teknisi_2";
 								    	}
 								    } ?>
 								</td>
@@ -127,7 +143,7 @@
 								<?php } ?>
 								<td>
 									<a href="<?php echo site_url('List_ticket/detail_ticket/'.$row->id_ticket)?>" class="btn btn-primary btn-circle btn-sm" title="Detail">
-										<i class="fas fa-search"></i>
+										<i class="bi bi-search"></i>
 									</a>
 								</td>
 							</tr>

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-	<h1 class="h3 mb-0 text-gray-800">List WO</h1><br>
+	<h1 class="h3 mb-0 text-gray-800">List WO <?php echo $nama_teknisi ?></h1><br>
 
 	<div class="flash-data" data-flashdata="<?php echo $this->session->flashdata('status')?>"></div>
 	<div class="flash-data1" data-flashdata="<?php echo $this->session->flashdata('status1')?>"></div>
@@ -11,7 +11,7 @@
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
-				<table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
+				<table class="table table-striped" id="table1" width="100%" cellspacing="0">
 					<thead>
 						<tr>
 							<th>#</th>

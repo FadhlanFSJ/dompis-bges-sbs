@@ -1,5 +1,9 @@
 <div class="container-fluid">
-    <h1 class="h3 mb-0 text-gray-800">List Absensi Teknisi</h1>
+    <h1 class="h3 mb-0 text-gray-800">List Teknisi Hari Ini (<?php date_default_timezone_set('Asia/Jakarta'); 
+    $hari_ini = date('l'); // Nama hari, misalnya "Monday"
+    $tanggal_hari_ini = date('d F Y'); // Format tanggal, misalnya "09 August 2024"
+    echo $hari_ini . ', ' . $tanggal_hari_ini;
+    ?>)</h1>
     <hr>
     <div class="flash-data" data-flashdata="<?php echo $this->session->flashdata('status')?>"></div>
 
@@ -7,14 +11,14 @@
         <div class="card-header py-3">
             <h6 class="m-0 fw-bold text-gray-800">Data Teknisi</h6>
             <hr>
-            <div class="">
+            <!-- <div class="">
                 <a href="<?php echo site_url('Absensi/reset'); ?>" title="Reset" class="btn btn-danger">
                     <i class="fa fa-undo"></i> Reset
                 </a>
                 <button id="updateButton" title="Update" class="btn btn-success">
                     <i class="fa fa-sync"></i> Update
                 </button>
-            </div>
+            </div> -->
         </div>
 
         <div class="card-body">
@@ -26,8 +30,7 @@
                                 <th>#</th>
                                 <th>NIK</th>
                                 <th>Nama</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>Jam Masuk</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,11 +39,7 @@
                                     <td><?php echo $no?></td>
                                     <td><?php echo $row->nik?></td>
                                     <td><?php echo $row->nama?></td>
-                                    <td><?php echo ($row->status_absensi == 0) ? 'Tidak Hadir' : 'Hadir'; ?></td>
-                                    <td>
-                                        <input type="hidden" name="status_absensi[<?php echo $row->nik; ?>]" value="0">
-                                        <input class="form-check-input" type="checkbox" name="status_absensi[<?php echo $row->nik; ?>]" value="1" <?php echo ($row->status_absensi == 1) ? 'checked' : ''; ?>>
-                                    </td>
+                                    <td><?php echo $row->jam_masuk?></td>
                                 </tr>
                             <?php $no++; } ?>
                         </tbody>

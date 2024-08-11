@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $title ?></title>
+    
     <link rel="stylesheet" href="<?php echo base_url('/assets/compiled/css/app.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('/assets/compiled/css/app-dark.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('/assets/compiled/css/iconly.css') ?>">
-    <link rel="stylesheet" href="<?php echo base_url('/assets/extension/@fontawesome/fontawesome-free/all.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('/assets/extensions/@fortawesome/fontawesome-free/css/all.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('/assets/extensions/simple-datatables/style.css') ?>">
     <link rel="stylesheet" crossorigin href="<?php echo base_url('/assets/compiled/css/table-datatable.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/extensions/sweetalert2/sweetalert2.min.css') ?> ">
+    <link rel="stylesheet" crossorigin href="<?php echo base_url('/assets/compiled/css/extra-component-sweetalert.css') ?> ">
     <script src="<?php echo base_url('assets/extensions/jquery/jquery.js') ?>"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <script src="<?php echo base_url('/assets/static/js/initTheme.js') ?>"></script>
@@ -57,9 +62,19 @@
     <script src="<?php echo base_url('assets/static/js/components/dark.js') ?>"></script>
     <script src="<?php echo base_url('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/extensions/@fontawesome/fontawesome-free/js/all.js') ?>"></script>
+    <script src="<?php echo base_url('assets/extensions/@fontawesome/fontawesome-free/js/all.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/extensions/simple-datatables/umd/simple-datatables.js') ?>"></script>
     <script src="<?php echo base_url('assets/static/js/pages/simple-datatables.js') ?>"></script>
     <script src="<?php echo base_url('assets/compiled/js/app.js') ?>"></script>
+    <script src="<?php echo base_url('assets/extensions/dayjs/dayjs.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/extensions/apexcharts/apexcharts.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/static/js/pages/ui-apexchart.js') ?>"></script>
+    <script src="<?php echo base_url('assets/extensions/chart.js/chart.umd.js') ?>"></script>
+    <script src="<?php echo base_url('assets/static/js/pages/ui-chartjs.js') ?>"></script>
+    <script src="<?php echo base_url('assets/static/js/pages/component-toasts.js') ?> "></script>
+    <script src="<?php echo base_url('assets/extensions/sweetalert2/sweetalert2.min.js') ?> "></script>>
+    <script src="<?php echo base_url('assets/static/js/pages/sweetalert2.js') ?>"></script>>
+
     <!-- Need: Apexcharts -->
     <script src="<?php echo base_url('assets/extensions/apexcharts/apexcharts.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/static/js/pages/dashboard.js') ?>"></script>

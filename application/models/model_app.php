@@ -30,7 +30,7 @@ class Model_app extends CI_Model
         $query = $this->db->query("SELECT A.id_ticket,A.status, A.tanggal, A.last_update, A.tanggal_solved, 
                                   A.id_kondisi, A.deadline,A.teknisi, A.problem_summary,A.filefoto, B.nama_sub_kategori,
                                   C.nama_kategori,D.nama, F.nama_dept, G.nama_kondisi, G.warna, G.waktu_respon,H.lokasi, 
-                                  I.nama_jabatan, K.nama AS nama_teknisi, 
+                                  I.nama_jabatan, K.nama AS nama_teknisi, J.nama AS nama_teknisi_2, R.rca, M.rfo,
                                   TIMESTAMPDIFF(SECOND, A.tanggal, A.tanggal_solved) AS durasi_waktu
                                   FROM ticket A 
                                   LEFT JOIN sub_kategori B ON B.id_sub_kategori = A.id_sub_kategori
@@ -42,6 +42,15 @@ class Model_app extends CI_Model
                                   LEFT JOIN lokasi H ON H.id_lokasi = A.id_lokasi
                                   LEFT JOIN jabatan I ON I.id_jabatan = D.id_jabatan
                                   LEFT JOIN karyawan K ON K.nik = A.teknisi
+                                  LEFT JOIN karyawan J ON J.nik = A.teknisi_2
+                                  LEFT JOIN (
+                                        SELECT id_ticket, MAX(id_tracking) as last_tracking_id
+                                        FROM tracking
+                                        GROUP BY id_ticket
+                                    ) L ON L.id_ticket = A.id_ticket
+                                    LEFT JOIN tracking T ON T.id_tracking = L.last_tracking_id
+                                    LEFT JOIN rfo M ON M.id_rfo = T.id_rfo
+                                    LEFT JOIN rca R ON R.id_rca = T.deskripsi
                                   ORDER BY A.tanggal DESC");
         $result = $query->result_array();
 
@@ -410,6 +419,21 @@ class Model_app extends CI_Model
         }
         return $value;
     }
+    function dropdown_teknisi_hadir()
+    { 
+        //Query untuk mengambil data user yang memiliki level 'Technician'
+        // $query = $this->db->query("SELECT A.username, B.nama FROM user A LEFT JOIN karyawan B ON B.nik = A.username WHERE A.level = 'Technician'");
+        $query = $this->db->query("SELECT R.nik, K.nama from rekap_absensi R 
+                                  LEFT JOIN karyawan K ON K.nik = R.nik
+                                  where R.tanggal = CURRENT_DATE()");
+        //Value default pada dropdown
+        $value[''] = '-- CHOOSE --';
+        //Menaruh data user teknisi ke dalam dropdown, value yang akan diambil adalah value id_user yang memiliki level 'Technician'
+        foreach ($query->result() as $row) {
+            $value[$row->nik] = $row->nama;
+        }
+        return $value;
+    }
 
     //Method yang digunakan untuk proses memilih teknisi untuk ticket dengan parameter (id_ticket)
     public function input_tugas($id)
@@ -715,7 +739,7 @@ class Model_app extends CI_Model
                                    LEFT JOIN sub_kategori B ON B.id_sub_kategori = A.id_sub_kategori
                                    LEFT JOIN kategori C ON C.id_kategori = B.id_kategori
                                    LEFT JOIN karyawan D ON D.nik = A.reported
-                                   LEFT JOIN user E ON E.username = A.teknisi
+                                   LEFT JOIN user E ON E.username = A.teknisi OR A.teknisi_2
                                    LEFT JOIN karyawan F ON F.nik = E.username
                                    LEFT JOIN kondisi G ON G.id_kondisi = A.id_kondisi
                                    LEFT JOIN lokasi H ON H.id_lokasi = A.id_lokasi
@@ -760,23 +784,45 @@ class Model_app extends CI_Model
         //Query untuk mendapatkan semua ticket dengan status 4 (On Progress) atau 6 (Comply) dengan diurutkan berdasarkan tanggal tiket dibuat
         $query = $this->db->query("SELECT A.progress, A.status, A.id_ticket, A.reported, A.tanggal, A.tanggal_solved, A.id_kondisi, A.deadline,
                                    A.problem_detail, A.problem_summary, A.filefoto, B.nama_sub_kategori, 
-                                   C.nama_kategori, D.nama, G.nama_kondisi, G.warna, H.lokasi, J.nama_dept, K.nama_jabatan FROM ticket A 
+                                   C.nama_kategori, D.nama, G.nama_kondisi, G.warna, H.lokasi, J.nama_dept, K.nama_jabatan, F.nama as nama_teknisi 
+                                   FROM ticket A 
                                    LEFT JOIN sub_kategori B ON B.id_sub_kategori = A.id_sub_kategori
                                    LEFT JOIN kategori C ON C.id_kategori = B.id_kategori
                                    LEFT JOIN karyawan D ON D.nik = A.reported
-                                   LEFT JOIN user E ON E.username = A.teknisi
+                                   LEFT JOIN user E ON E.username = A.teknisi OR E.username = A.teknisi_2
                                    LEFT JOIN karyawan F ON F.nik = E.username
                                    LEFT JOIN kondisi G ON G.id_kondisi = A.id_kondisi
                                    LEFT JOIN lokasi H ON H.id_lokasi = A.id_lokasi
                                    LEFT JOIN bagian_departemen I ON I.id_bagian_dept = D.id_bagian_dept
                                    LEFT JOIN departemen J ON J.id_dept = I.id_dept
                                    LEFT JOIN jabatan K ON K.id_jabatan = D.nik
-                                   WHERE F.nik = '$id' AND A.status IN (4,6,7) ORDER BY G.waktu_respon ASC");
+                                   WHERE F.nik = '$id' 
+                                   AND A.status IN (4,6,7) 
+                                   AND MONTH(A.tanggal) = MONTH(CURRENT_DATE())
+                                   AND YEAR(A.tanggal) = YEAR(CURRENT_DATE())
+                                   ORDER BY G.waktu_respon ASC");
         return $query;
     }
     public function absensi(){
       $query = $this->db->query("SELECT nama, nik, status_absensi FROM absensi");
       return $query;
+    }
+
+    public function getRekapAbsensi(){
+      $query = $this->db->query("SELECT R.nik, K.nama, R.jam_masuk from rekap_absensi R
+                                LEFT JOIN karyawan K ON K.nik = R.nik
+                                WHERE tanggal = CURRENT_DATE()
+      ");
+      return $query;
+    }
+    public function getRekapAbsensiById($id){
+      $currentDate = date('Y-m-d');
+      $query = $this->db->query("SELECT * FROM rekap_absensi WHERE nik = '$id' AND tanggal = '$currentDate' ");
+      return $query;
+    }
+
+    public function insertAbsensi($data){
+      $this->db->insert('rekap_absensi', $data);
     }
 
     //Method yang digunakan untuk melakukan approval ticket oleh teknisi
@@ -1403,9 +1449,10 @@ public function get_total_records_gaul_voice() {
     public function tracking_ticket($id)
     {
         //Query untuk mendapatkan data tracking dari setiap ticket
-        $query = $this->db->query("SELECT A.tanggal, A.status, A.deskripsi, A.filefoto, B.nama, R.rca FROM tracking A 
+        $query = $this->db->query("SELECT A.tanggal, A.status, A.deskripsi, A.filefoto, B.nama, R.rca, S.rfo FROM tracking A 
                                    LEFT JOIN karyawan B ON B.nik = A.id_user
                                    LEFT JOIN rca R ON R.id_rca = A.deskripsi
+                                   LEFT JOIN RFO S ON S.id_rfo = A.id_rfo
                                    WHERE A.id_ticket ='$id'");
         return $query;
     }
@@ -1518,7 +1565,7 @@ public function get_total_records_gaul_voice() {
       $query = $this->db->query("SELECT A.id_ticket, A.status, A.tanggal, A.last_update, A.tanggal_solved, 
                                   A.id_kondisi, A.deadline, A.teknisi, A.problem_summary, A.filefoto, B.nama_sub_kategori,
                                   C.nama_kategori, D.nama, F.nama_dept, G.nama_kondisi, G.warna, G.waktu_respon, H.lokasi, 
-                                  I.nama_jabatan, K.nama AS nama_teknisi, 
+                                  I.nama_jabatan, K.nama AS nama_teknisi, J.nama as nama_teknisi_2, R.rca, M.rfo,
                                   TIMESTAMPDIFF(SECOND, A.tanggal, A.tanggal_solved) AS durasi_waktu
                                   FROM ticket A 
                                   LEFT JOIN sub_kategori B ON B.id_sub_kategori = A.id_sub_kategori
@@ -1530,6 +1577,15 @@ public function get_total_records_gaul_voice() {
                                   LEFT JOIN lokasi H ON H.id_lokasi = A.id_lokasi
                                   LEFT JOIN jabatan I ON I.id_jabatan = D.id_jabatan
                                   LEFT JOIN karyawan K ON K.nik = A.teknisi
+                                  LEFT JOIN karyawan J ON J.nik = A.teknisi_2
+                                  LEFT JOIN (
+                                        SELECT id_ticket, MAX(id_tracking) as last_tracking_id
+                                        FROM tracking
+                                        GROUP BY id_ticket
+                                    ) L ON L.id_ticket = A.id_ticket
+                                    LEFT JOIN tracking T ON T.id_tracking = L.last_tracking_id
+                                    LEFT JOIN rfo M ON M.id_rfo = T.id_rfo
+                                    LEFT JOIN rca R ON R.id_rca = T.deskripsi
                                   WHERE A.tanggal BETWEEN ? AND ?
                                   ORDER BY A.tanggal DESC", array($start_date, $end_date));
       return $query->result();
@@ -1538,11 +1594,17 @@ public function get_total_records_gaul_voice() {
     //Method untuk mengambil data teknisi dan jumlah tugasnya berdasarkan hari ini
     public function getTek()
     {
-        $query = $this->db->query("SELECT A.id_user, B.nama, SUM(C.status NOT IN (1,2)) as total FROM user A 
-                                    LEFT JOIN karyawan B ON B.nik = A.username 
-                                    LEFT JOIN ticket C ON C.teknisi = B.nik 
-                                    WHERE A.level = 'technician' AND DATE(tanggal)=DATE(CURRENT_DATE)
-                                    GROUP BY B.nama ");
+        $query = $this->db->query("SELECT A.id_user, B.nama, COUNT(DISTINCT temp.nik) as total 
+                                  FROM user A 
+                                  LEFT JOIN karyawan B ON B.nik = A.username
+                                  LEFT JOIN (
+                                      SELECT teknisi AS nik, tanggal FROM ticket WHERE DATE(tanggal) = DATE(CURRENT_DATE)
+                                      UNION
+                                      SELECT teknisi_2 AS nik, tanggal FROM ticket WHERE DATE(tanggal) = DATE(CURRENT_DATE)
+                                  ) AS temp ON temp.nik = B.nik 
+                                  WHERE A.level = 'technician'
+                                  GROUP BY B.nama
+                                  HAVING total > 0");
         return $query;
     }
 

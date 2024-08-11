@@ -48,9 +48,9 @@
                                 Selamat Datang! <?php echo $user ?>
                             </a>
                             <ul class="submenu">
-                                <li class="submenu-item"><a href="<?php echo site_url('User/profile') ?>" class="submenu-link">Profile</a></li>
-                                <li class="submenu-item"><a href="<?php echo site_url('User/password') ?>" class="submenu-link">Change Password</a></li>
-                                <li class="submenu-item"><a href="<?php echo site_url('Login/logout') ?>" data-toggle="modal" class="submenu-link">Logout</a></li>
+                                <li class="submenu-item"><a href="<?php echo site_url('User/profile') ?>" class="submenu-link"><i class="fas fa-user"></i><span> Profile</span></a></li>
+                                <li class="submenu-item"><a href="<?php echo site_url('User/password') ?>" class="submenu-link"><i class="fas fa-key"></i><span> Change Password</span></a></li>
+                                <li class="submenu-item"><a href="<?php echo site_url('Login/logout') ?>" data-toggle="modal" class="submenu-link"><i class="fas fa-sign-out-alt"></i><span> Logout</span></a></li>
                             </ul>
                         </li>
                     </ul>
@@ -93,7 +93,7 @@
 
                 <li class="sidebar-item has-sub">
                     <a href="#" class="sidebar-link">
-                        <i class="fa-solid fa-industry"></i>
+                        <i class="fa fa-industry" aria-hidden="true"></i>
                         <span>Data Management</span>
                     </a>
                     <ul class="submenu">
@@ -107,28 +107,28 @@
 
                 <li class="sidebar-item has-sub">
                     <a href="#" class="sidebar-link">
-                        <i class="fa-solid fa-gear"></i>
+                        <i class="fas fa-cog" aria-hidden="true"></i>
                         <span>Konfigurasi</span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item"><a href="<?php echo site_url('User') ?>" class="submenu-link">User Account</a></li>
                         <li class="submenu-item"><a href="<?php echo site_url('Kategori') ?>" class="submenu-link">Kategori</a></li>
                         <li class="submenu-item"><a href="<?php echo site_url('Subkategori') ?>" class="submenu-link">Sub Kategori</a></li>
-                        <li class="submenu-item"><a href="<?php echo site_url('Kondisi') ?>" class="submenu-link"></a>Priority</li>
-                        <li class="submenu-item"><a href="<?php echo site_url('Informasi') ?>" class="submenu-link"></a>Informasi Umum</li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Kondisi') ?>" class="submenu-link">Priority</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Informasi') ?>" class="submenu-link">Informasi Umum</a></li>
                     </ul>
                 </li>
 
                 <li class="sidebar-item">
                     <a href="<?php echo site_url('Statistik') ?>" class="sidebar-link">
-                        <i class="fa-solid fa-chart-simple"></i>
+                        <i class="fas fa-chart-line"></i>
                         <span>Data Statistik</span>
                     </a>
                 </li>
                 
                 <li class="sidebar-item">
                     <a href="<?php echo site_url('Absensi') ?>" class="sidebar-link">
-                        <i class="fa-solid fa-calendar-days"></i>
+                        <i class="fas fa-calendar-check"></i>
                         <span>Absensi</span>
                     </a>
                 </li>
@@ -178,14 +178,14 @@
                         <li class="submenu-item"><a href="<?php echo site_url('User') ?>" class="submenu-link">User Account</a></li>
                         <li class="submenu-item"><a href="<?php echo site_url('Kategori') ?>" class="submenu-link">Kategori</a></li>
                         <li class="submenu-item"><a href="<?php echo site_url('Subkategori') ?>" class="submenu-link">Sub Kategori</a></li>
-                        <li class="submenu-item"><a href="<?php echo site_url('Kondisi') ?>" class="submenu-link"></a>Priority</li>
-                        <li class="submenu-item"><a href="<?php echo site_url('Informasi') ?>" class="submenu-link"></a>Informasi Umum</li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Kondisi') ?>" class="submenu-link">Priority</a></li>
+                        <li class="submenu-item"><a href="<?php echo site_url('Informasi') ?>" class="submenu-link">Informasi Umum</a></li>
                     </ul>
                 </li>
 
                 <li class="sidebar-item">
                     <a href="<?php echo site_url('Statistik') ?>" class="sidebar-link">
-                        <i class="fa-solid fa-chart-simple"></i>
+                        <i class="fas fa-chart-line"></i>
                         <span>Data Statistik</span>
                     </a>
                 </li>
@@ -198,13 +198,13 @@
                 </li>
                 <li class="sidebar-item">
                     <a href="<?php echo site_url('List_ticket_tek/index_approve') ?>" class="sidebar-link">
-                        <i class="fa-solid fa-ticket-simple"></i>
+                        <i class="fas fa-ticket-alt"></i>
                         <span>Tiket Assigned</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="<?php echo site_url('List_ticket_tek/index_tugas') ?>" class="sidebar-link">
-                        <i class="fa-solid fa-list-check"></i>
+                        <i class="fas fa-tasks"></i>
                         <span>List Assigment</span>
                     </a>
                 </li>
