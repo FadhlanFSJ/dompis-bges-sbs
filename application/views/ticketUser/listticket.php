@@ -112,7 +112,7 @@
 								<?php } ?>
 								<td>
 									<a href="<?php echo site_url('List_ticket_user/detail/'.$row->id_ticket)?>" class="btn btn-primary btn-circle btn-sm" title="Detail">
-										<i class="fas fa-search"></i>
+										<i class="bi bi-search"></i>
 									</a>
 								</td>
 							</tr>

@@ -95,7 +95,8 @@
 						        				<span class="text"><?php echo $row->filefoto ?></span>
 						        			</a>
 						        		<?php } else {?>
-						        			<p><?php echo nl2br($row->rca)?></p>
+						        			<p>RCA : <?php echo nl2br($row->rca)?></p>
+											<p>RFO : <?php echo nl2br($row->rfo)?></p>
 						        			<a data-fancybox="gallery"  href="<?php echo base_url('teknisi/'.$row->filefoto) ?>">
 						        				<img src="<?php echo base_url('teknisi/'.$row->filefoto) ?>" style="width:100%;max-width:300px">
 						        			</a><br>

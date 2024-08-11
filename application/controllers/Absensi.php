@@ -21,7 +21,7 @@ class Absensi extends CI_Controller
             $id_dept = $this->session->userdata('id_dept');
 			$id_user = $this->session->userdata('id_user');
             
-            $data['karyawan'] = $this->model_app->absensi()->result();
+            $data['karyawan'] = $this->model_app->getRekapAbsensi()->result();
 
             $this->load->view('template', $data);
         }else{

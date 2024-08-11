@@ -1,27 +1,28 @@
 <?php
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+if (!defined('BASEPATH')) exit('No direct script access allowed');
+date_default_timezone_set('Asia/Jakarta');
 
 class List_ticket extends CI_Controller
 {
     public function __construct()
     {
-          parent::__construct();
-          //Meload model_app
-          $this->load->model('model_app');
+        parent::__construct();
+        //Meload model_app
+        $this->load->model('model_app');
 
-          //Jika session tidak ditemukan
-          if (!$this->session->userdata('id_user')) {
-              //Kembali ke halaman Login
-              $this->session->set_flashdata('status1', 'expired');
-              redirect('login');
-          }
+        //Jika session tidak ditemukan
+        if (!$this->session->userdata('id_user')) {
+            //Kembali ke halaman Login
+            $this->session->set_flashdata('status1', 'expired');
+            redirect('login');
+        }
     }
 
     //////////////////////////////////////////////////////////////Bagian List Ticket//////////////////////////////////////////////////////////////
     public function index()
     {
         //User harus admin, tidak boleh role user lain
-        if($this->session->userdata('level') == "Admin" OR $this->session->userdata('level') == "User" ){
+        if ($this->session->userdata('level') == "Admin" or $this->session->userdata('level') == "User") {
             //Menyusun template List Ticket
             $data['title']    = "List All Tiket";
             $data['navbar']   = "navbar";
@@ -47,9 +48,9 @@ class List_ticket extends CI_Controller
 
     public function tiket_datin()
     {
-        
+
         //User harus admin, tidak boleh role user lain
-        if($this->session->userdata('level') == "Admin"){
+        if ($this->session->userdata('level') == "Admin") {
             //Menyusun template List Ticket
             $data['title']    = "List All Tiket";
             $data['navbar']   = "navbar";
@@ -76,7 +77,7 @@ class List_ticket extends CI_Controller
     public function tiket_datin_k1()
     {
         //User harus admin, tidak boleh role user lain
-        if($this->session->userdata('level') == "Admin" OR $this->session->userdata('level') == "User"){
+        if ($this->session->userdata('level') == "Admin" or $this->session->userdata('level') == "User") {
             //Menyusun template List Ticket
             $data['title']    = "List All Tiket";
             $data['navbar']   = "navbar";
@@ -103,7 +104,7 @@ class List_ticket extends CI_Controller
     public function tiket_datin_k2()
     {
         //User harus admin, tidak boleh role user lain
-        if($this->session->userdata('level') == "Admin" OR $this->session->userdata('level') == "User"){
+        if ($this->session->userdata('level') == "Admin" or $this->session->userdata('level') == "User") {
             //Menyusun template List Ticket
             $data['title']    = "List All Tiket";
             $data['navbar']   = "navbar";
@@ -130,7 +131,7 @@ class List_ticket extends CI_Controller
     public function tiket_datin_k3()
     {
         //User harus admin, tidak boleh role user lain
-        if($this->session->userdata('level') == "Admin" OR $this->session->userdata('level') == "User"){
+        if ($this->session->userdata('level') == "Admin" or $this->session->userdata('level') == "User") {
             //Menyusun template List Ticket
             $data['title']    = "List All Tiket";
             $data['navbar']   = "navbar";
@@ -157,7 +158,7 @@ class List_ticket extends CI_Controller
     public function tiket_prev_datin()
     {
         //User harus admin, tidak boleh role user lain
-        if($this->session->userdata('level') == "Admin" OR $this->session->userdata('level') == "User"){
+        if ($this->session->userdata('level') == "Admin" or $this->session->userdata('level') == "User") {
             //Menyusun template List Ticket
             $data['title']    = "List All Tiket";
             $data['navbar']   = "navbar";
@@ -184,7 +185,7 @@ class List_ticket extends CI_Controller
     public function tiket_hsi()
     {
         //User harus admin, tidak boleh role user lain
-        if($this->session->userdata('level') == "Admin" OR $this->session->userdata('level') == "User"){
+        if ($this->session->userdata('level') == "Admin" or $this->session->userdata('level') == "User") {
             //Menyusun template List Ticket
             $data['title']    = "List All Tiket";
             $data['navbar']   = "navbar";
@@ -211,7 +212,7 @@ class List_ticket extends CI_Controller
     public function tiket_voice()
     {
         //User harus admin, tidak boleh role user lain
-        if($this->session->userdata('level') == "Admin" OR $this->session->userdata('level') == "User"){
+        if ($this->session->userdata('level') == "Admin" or $this->session->userdata('level') == "User") {
             //Menyusun template List Ticket
             $data['title']    = "List All Tiket";
             $data['navbar']   = "navbar";
@@ -235,36 +236,44 @@ class List_ticket extends CI_Controller
         }
     }
 
-    public function index_tugas()
-	{
-		//User harus Teknisi, tidak boleh role user lain
-		if($this->session->userdata('level') == "Admin" OR $this->session->userdata('level') == "User"){
-			//Menyusun template List Assignment
-			$data['title'] 	  = "List Assignment";
-			$data['navbar']   = "navbar";
-			$data['sidebar']  = "sidebar";
-			$data['body']     = "ticket/listwo"; 
+    public function index_tugas($nik = null)
+    {
+        //User harus Teknisi, tidak boleh role user lain
+        if ($this->session->userdata('level') == "Admin" or $this->session->userdata('level') == "User") {
+            //Menyusun template List Assignment
+            $data['title']       = "List Assignment";
+            $data['navbar']   = "navbar";
+            $data['sidebar']  = "sidebar";
+            $data['body']     = "ticket/listwo";
 
-        	//Session
-			$id_dept 	= $this->session->userdata('id_dept');
-			$id_user 	= $this->session->userdata('id_user');
+            //Session
+            $id_dept     = $this->session->userdata('id_dept');
+            $id_user     = $this->session->userdata('id_user');
 
-        	//Daftar semua ticket yang ditugaskan kepada teknisi, get dari model_app (daftar_tugas) berdasarkan id_user teknisi, data akan ditampung dalam parameter 'tugas'
-			$data['wo'] = $this->model_app->daftar_wo($id_user)->result();
+            //Daftar semua ticket yang ditugaskan kepada teknisi, get dari model_app (daftar_tugas) berdasarkan id_user teknisi, data akan ditampung dalam parameter 'tugas'
+            $wo = $this->model_app->daftar_wo($nik)->result();
+            $data['wo'] = $wo;
 
-			//Load template
-			$this->load->view('template', $data);
-		} else {
-			//Bagian ini jika role yang mengakses tidak sama dengan Teknisi
-			//Akan dibawa ke Controller Errorpage
-			redirect('Errorpage');
-		}
-	}
+            if (!empty($wo)) {
+                $data['nama_teknisi'] = $wo[0]->nama_teknisi;
+            } else {
+                $data['nama_teknisi'] = '';
+            }
+
+
+            //Load template
+            $this->load->view('template', $data);
+        } else {
+            //Bagian ini jika role yang mengakses tidak sama dengan Teknisi
+            //Akan dibawa ke Controller Errorpage
+            redirect('Errorpage');
+        }
+    }
 
     public function produktiv()
     {
         //User harus admin, tidak boleh role user lain
-        if($this->session->userdata('level') == "Admin" OR $this->session->userdata('level') == "User"){
+        if ($this->session->userdata('level') == "Admin" or $this->session->userdata('level') == "User") {
             //Menyusun template List Ticket
             $data['title']    = "List Produktivitas";
             $data['navbar']   = "navbar";
@@ -278,13 +287,13 @@ class List_ticket extends CI_Controller
             //Daftar semua tiket, get dari model_app (all_ticket), data akan ditampung dalam parameter 'listticket'
             //$data['listticket'] = $this->model_app->all_ticket()->result();
             //$data['list_produktiv'] = $this->model_app->produktiv()->result();
-           // $data['total_produktiv'] = $this->model_app->get_produktiv();
+            // $data['total_produktiv'] = $this->model_app->get_produktiv();
             $data['teknisi_pro']     = $this->model_app->getTeknisi_pro()->result();
             $data['hd_pro']     = $this->model_app->getHd_pro()->result();
 
             //Daftar semua ticket yang ditugaskan kepada teknisi, get dari model_app (daftar_tugas) berdasarkan id_user teknisi, data akan ditampung dalam parameter 'tugas'
-			$data['tugas'] = $this->model_app->daftar_tugas($id_user)->result();
-            
+            $data['tugas'] = $this->model_app->daftar_tugas($id_user)->result();
+
 
             //Load template
             $this->load->view('template', $data);
@@ -298,7 +307,7 @@ class List_ticket extends CI_Controller
     public function produktiv_hd()
     {
         //User harus admin, tidak boleh role user lain
-        if($this->session->userdata('level') == "Admin" OR $this->session->userdata('level') == "User"){
+        if ($this->session->userdata('level') == "Admin" or $this->session->userdata('level') == "User") {
             //Menyusun template List Ticket
             $data['title']    = "List Produktivitas";
             $data['navbar']   = "navbar";
@@ -312,7 +321,7 @@ class List_ticket extends CI_Controller
             //Daftar semua tiket, get dari model_app (all_ticket), data akan ditampung dalam parameter 'listticket'
             //$data['listticket'] = $this->model_app->all_ticket()->result();
             //$data['list_produktiv'] = $this->model_app->produktiv()->result();
-           // $data['total_produktiv'] = $this->model_app->get_produktiv();
+            // $data['total_produktiv'] = $this->model_app->get_produktiv();
             $data['hd_pro']     = $this->model_app->getHd_pro()->result();
 
             //Load template
@@ -327,7 +336,7 @@ class List_ticket extends CI_Controller
     public function produktiv_tl()
     {
         //User harus admin, tidak boleh role user lain
-        if($this->session->userdata('level') == "Admin" OR $this->session->userdata('level') == "User"){
+        if ($this->session->userdata('level') == "Admin" or $this->session->userdata('level') == "User") {
             //Menyusun template List Ticket
             $data['title']    = "List Produktivitas";
             $data['navbar']   = "navbar";
@@ -341,7 +350,7 @@ class List_ticket extends CI_Controller
             //Daftar semua tiket, get dari model_app (all_ticket), data akan ditampung dalam parameter 'listticket'
             //$data['listticket'] = $this->model_app->all_ticket()->result();
             //$data['list_produktiv'] = $this->model_app->produktiv()->result();
-           // $data['total_produktiv'] = $this->model_app->get_produktiv();
+            // $data['total_produktiv'] = $this->model_app->get_produktiv();
             $data['tl_pro']     = $this->model_app->getTl_pro()->result();
 
             //Load template
@@ -356,7 +365,7 @@ class List_ticket extends CI_Controller
     public function detail_ticket($id)
     {
         //User harus admin, tidak boleh role user lain
-        if($this->session->userdata('level') == "Admin"){
+        if ($this->session->userdata('level') == "Admin") {
             //Menyusun template Detail Ticket
             $data['title']    = "Detail Ticket";
             $data['navbar']   = "navbar";
@@ -386,7 +395,7 @@ class List_ticket extends CI_Controller
     public function list_approve()
     {
         //User harus admin, tidak boleh role user lain
-        if($this->session->userdata('level') == "Admin"){
+        if ($this->session->userdata('level') == "Admin") {
             //Menyusun template List Approval Ticket
             $data['title']    = "Ticket Received";
             $data['navbar']   = "navbar";
@@ -412,7 +421,7 @@ class List_ticket extends CI_Controller
     public function detail_approve($id)
     {
         //User harus admin, tidak boleh role user lain
-        if($this->session->userdata('level') == "Admin"){
+        if ($this->session->userdata('level') == "Admin") {
             //Menyusun template Detail Ticket yang belum di-approve
             $data['title']    = "Detail Ticket";
             $data['navbar']   = "navbar";
@@ -425,7 +434,7 @@ class List_ticket extends CI_Controller
 
             //Detail setiap tiket yang belum di-approve, get dari model_app (detail_ticket) dengan parameter id_ticket, data akan ditampung dalam parameter 'detail'
             $data['detail'] = $this->model_app->detail_ticket($id)->row_array();
-            
+
             //Tracking setiap tiket, get dari model_app (tracking_ticket) berdasarkan id_ticket, data akan ditampung dalam parameter 'tracking'
             $data['tracking'] = $this->model_app->tracking_ticket($id)->result();
 
@@ -440,7 +449,7 @@ class List_ticket extends CI_Controller
 
     public function setPriority($id)
     {
-        if($this->session->userdata('level') == "Admin"){
+        if ($this->session->userdata('level') == "Admin") {
             //Menyusun template Detail Ticket yang belum di-approve
             $data['title']    = "Set Priority and Technician";
             $data['navbar']   = "navbar";
@@ -463,7 +472,7 @@ class List_ticket extends CI_Controller
             $data['id_kondisi'] = "";
 
             //Dropdown pilih Teknisi, menggunakan model_app (dropdown_teknisi), nama teknisi ditampung pada 'dd_teknisi', dan data yang akan di simpan adalah id_user dengan level teknisi, data akan ditampung pada 'id_teknisi'
-            $data['dd_teknisi'] = $this->model_app->dropdown_teknisi();
+            $data['dd_teknisi'] = $this->model_app->dropdown_teknisi_hadir();
             $data['id_teknisi'] = "";
 
             //Load template
@@ -478,7 +487,10 @@ class List_ticket extends CI_Controller
     public function approve($id)
     {
         //Form validasi untuk kondisi dengan nama validasi = id_kondisi
-        $this->form_validation->set_rules('id_kondisi', 'Id_kondisi', 'required',
+        $this->form_validation->set_rules(
+            'id_kondisi',
+            'Id_kondisi',
+            'required',
             array(
                 'required' => '<div class="alert alert-danger alert-dismissable">
                                     <strong>Gagal!</strong> Silahkan pilih Priority.
@@ -486,7 +498,10 @@ class List_ticket extends CI_Controller
             )
         );
 
-        $this->form_validation->set_rules('id_teknisi1', 'Id_teknisi1', 'required',
+        $this->form_validation->set_rules(
+            'id_teknisi1',
+            'Id_teknisi1',
+            'required',
             array(
                 'required' => '<div class="alert alert-danger alert-dismissable">
                                     <strong>Gagal!</strong> Silahkan pilih Teknisi.
@@ -494,8 +509,8 @@ class List_ticket extends CI_Controller
             )
         );
 
-        if($this->form_validation->run() == FALSE){
-            if($this->session->userdata('level') == "Admin"){
+        if ($this->form_validation->run() == FALSE) {
+            if ($this->session->userdata('level') == "Admin") {
                 //Menyusun template Detail Ticket yang belum di-approve
                 $data['title']    = "Set Priority and Technician";
                 $data['navbar']   = "navbar";
@@ -529,8 +544,8 @@ class List_ticket extends CI_Controller
                 redirect('Errorpage');
             }
         } else {
-                //User harus admin, tidak boleh role user lain
-            if($this->session->userdata('level') == "Admin"){
+            //User harus admin, tidak boleh role user lain
+            if ($this->session->userdata('level') == "Admin") {
                 //Proses me-approve ticket, menggunakan model_app (approve) dengan parameter id_ticket yang akan di-approve
                 $this->model_app->approve($id);
                 //Memanggil fungsi kirim email dari admin ke user
@@ -552,7 +567,7 @@ class List_ticket extends CI_Controller
     public function detail_reject($id)
     {
         //User harus admin, tidak boleh role user lain
-        if($this->session->userdata('level') == "Admin"){
+        if ($this->session->userdata('level') == "Admin") {
             //Menyusun template Detail Ticket yang akan di-reject
             $data['title']    = "Reject Ticket";
             $data['navbar']   = "navbar";
@@ -578,7 +593,10 @@ class List_ticket extends CI_Controller
     public function reject($id)
     {
         //Form validasi untuk message yang akan di kirim ke email user
-        $this->form_validation->set_rules('message', 'Message', 'required',
+        $this->form_validation->set_rules(
+            'message',
+            'Message',
+            'required',
             array(
                 'required' => '<div class="alert alert-danger alert-dismissable">
                                     <strong>Failed!</strong> Please Fill the Meesage.
@@ -586,9 +604,9 @@ class List_ticket extends CI_Controller
             )
         );
 
-        if($this->form_validation->run() == FALSE){
+        if ($this->form_validation->run() == FALSE) {
             //User harus admin, tidak boleh role user lain
-            if($this->session->userdata('level') == "Admin"){
+            if ($this->session->userdata('level') == "Admin") {
                 //Menyusun template Detail Ticket yang akan di-reject
                 $data['title']    = "Reject Ticket";
                 $data['navbar']   = "navbar";
@@ -611,7 +629,7 @@ class List_ticket extends CI_Controller
             }
         } else {
             //User harus admin, tidak boleh role user lain
-            if($this->session->userdata('level') == "Admin"){
+            if ($this->session->userdata('level') == "Admin") {
                 //Proses me-reject ticket, menggunakan model_app (reject) dengan parameter id_ticket yang akan di-reject
                 $this->model_app->reject($id);
                 //Memanggil fungsi kirim email dari admin ke user
@@ -619,10 +637,10 @@ class List_ticket extends CI_Controller
                 //Set pemberitahuan bahwa ticket berhasil di-reject
                 $this->session->set_flashdata('status', 'Rejected');
                 //Kembali ke halaman List approvel ticket (list_approve)
-                redirect('List_ticket/list_approve');   
+                redirect('List_ticket/list_approve');
             } else {
-            //Bagian ini jika role yang mengakses tidak sama dengan admin
-            //Akan dibawa ke Controller Errorpage
+                //Bagian ini jika role yang mengakses tidak sama dengan admin
+                //Akan dibawa ke Controller Errorpage
                 redirect('Errorpage');
             }
         }
@@ -634,7 +652,7 @@ class List_ticket extends CI_Controller
         $email  = $this->input->post('email');
 
         //User harus admin, tidak boleh role user lain
-        if($this->session->userdata('level') == "Admin"){
+        if ($this->session->userdata('level') == "Admin") {
             //Menyusun template Detail Ticket yang akan ditugaskan ke teknisi
             $data['title']    = "Assign Technician";
             $data['navbar']   = "navbar";
@@ -647,7 +665,7 @@ class List_ticket extends CI_Controller
 
             //Detail setiap tiket yang akan ditugaskan ke teknisi, get dari model_app (detail_ticket) dengan parameter id_ticket, data akan ditampung dalam parameter 'detail'
             $data['detail'] = $this->model_app->detail_ticket($id)->row_array();
-            
+
             //Tracking setiap tiket, get dari model_app (tracking_ticket) berdasarkan id_ticket, data akan ditampung dalam parameter 'tracking'
             $data['tracking'] = $this->model_app->tracking_ticket($id)->result();
 
@@ -667,7 +685,10 @@ class List_ticket extends CI_Controller
     public function tugas($id)
     {
         //Form validasi untuk id_user dengan level teknisi dengan nama validasi = id_teknisi
-        $this->form_validation->set_rules('id_teknisi', 'Id_teknisi', 'required',
+        $this->form_validation->set_rules(
+            'id_teknisi',
+            'Id_teknisi',
+            'required',
             array(
                 'required' => '<div class="alert alert-danger alert-dismissable">
                                     <strong>Failed!</strong> Please choose the technician.
@@ -676,9 +697,9 @@ class List_ticket extends CI_Controller
         );
 
         //Kondisi jika saat proses penugasan tidak memenuhi syarat validasi akan dikembalikan ke halaman detail ticket yang akan ditugaskan
-        if($this->form_validation->run() == FALSE){
+        if ($this->form_validation->run() == FALSE) {
             //User harus admin, tidak boleh role user lain
-            if($this->session->userdata('level') == "Admin"){
+            if ($this->session->userdata('level') == "Admin") {
                 //Menyusun template Detail Ticket yang akan ditugaskan ke teknisi
                 $data['title']    = "Assign Technician";
                 $data['navbar']   = "navbar";
@@ -695,7 +716,7 @@ class List_ticket extends CI_Controller
                 //Dropdown pilih Teknisi, menggunakan model_app (dropdown_teknisi), nama teknisi ditampung pada 'dd_teknisi', dan data yang akan di simpan adalah id_user dengan level teknisi, data akan ditampung pada 'id_teknisi'
                 $data['dd_teknisi'] = $this->model_app->dropdown_teknisi();
                 $data['id_teknisi'] = "";
-                
+
                 //Load template
                 $this->load->view('template', $data);
             } else {
@@ -706,10 +727,10 @@ class List_ticket extends CI_Controller
         } else {
             //Bagian ini jika validasi terpenuhi
             //User harus admin, tidak boleh role user lain
-            if($this->session->userdata('level') == "Admin"){
+            if ($this->session->userdata('level') == "Admin") {
                 //Proses menugaskan ticket ke teknisi, menggunakan model_app (input_tugas) dengan parameter id_ticket yang akan di-tugaskan
                 $this->model_app->input_tugas($id);
-                
+
                 $this->model_app->emailtugas($id);
                 //Set pemberitahuan bahwa tiket berhasil ditugaskan ke teknisi
                 $this->session->set_flashdata('status', 'Assigned');
@@ -722,7 +743,8 @@ class List_ticket extends CI_Controller
             }
         }
     }
-    public function filtertanggal(){
+    public function filtertanggal()
+    {
         $data['title']    = "List All Tiket";
         $data['navbar']   = "navbar";
         $data['sidebar']  = "sidebar";
@@ -739,7 +761,8 @@ class List_ticket extends CI_Controller
         $this->load->view('template', $data);
     }
 
-    public function checkDateExport(){
+    public function checkDateExport()
+    {
         $start_date = $this->input->get('start_date');
         $end_date = $this->input->get('end_date');
 
@@ -752,93 +775,91 @@ class List_ticket extends CI_Controller
     }
 
     public function exportToExcel($listticket)
-{
-    // Load PhpSpreadsheet library
-    require(FCPATH . 'vendor/autoload.php');
-    
-    // Fully qualified class names
-    $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
-    $sheet = $spreadsheet->getActiveSheet();
-    
-    $sheet->setCellValue('A1', 'NO');
-    $sheet->setCellValue('B1', 'NO TICKET');
-    $sheet->setCellValue('C1', 'PRIORITY');
-    $sheet->setCellValue('D1', 'WAKTU OPEN');
-    $sheet->setCellValue('E1', 'MAX TTR');
-    $sheet->setCellValue('F1', 'SUB CATEGORY');
-    $sheet->setCellValue('G1', 'SO');
-    $sheet->setCellValue('H1', 'SID/INET/NOTEL');
-    $sheet->setCellValue('I1', 'LAST UPDATE');
-    $sheet->setCellValue('J1', 'DURASI');
-    $sheet->setCellValue('K1', 'TEKNISI');
-    $sheet->setCellValue('L1', 'STATUS');
+    {
+        // Load PhpSpreadsheet library
+        require(FCPATH . 'vendor/autoload.php');
 
-    $row = 2;
-    $no = 1;
+        // Fully qualified class names
+        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
 
-    foreach ($listticket as $dt) {
-        switch ($dt->status) {
-            case 0:
-                $dt->statusMessage = "Ticket Rejected";
-                break;
-            case 1:
-                $dt->statusMessage = "Ticket Submitted";
-                break;
-            case 2:
-                $dt->statusMessage = "Category Changed";
-                break;
-            case 3:
-                $dt->statusMessage = "Assigned to Technician";
-                break;
-            case 4:
-                $dt->statusMessage = "On Progress";
-                break;
-            case 5:
-                $dt->statusMessage = "Pending";
-                break;
-            case 6:
-                $dt->statusMessage = "Comply";
-                break;
-            case 7:
-                $dt->statusMessage = "Not Comply";
-                break;
-            default:
-                $dt->statusMessage = "Unknown";
+        $sheet->setCellValue('A1', 'NO');
+        $sheet->setCellValue('B1', 'NO TICKET');
+        $sheet->setCellValue('C1', 'PRIORITY');
+        $sheet->setCellValue('D1', 'WAKTU OPEN');
+        $sheet->setCellValue('E1', 'MAX TTR');
+        $sheet->setCellValue('F1', 'SUB CATEGORY');
+        $sheet->setCellValue('G1', 'SO');
+        $sheet->setCellValue('H1', 'SID/INET/NOTEL');
+        $sheet->setCellValue('I1', 'LAST UPDATE');
+        $sheet->setCellValue('J1', 'DURASI');
+        $sheet->setCellValue('K1', 'TEKNISI');
+        $sheet->setCellValue('L1', 'STATUS');
+
+        $row = 2;
+        $no = 1;
+
+        foreach ($listticket as $dt) {
+            switch ($dt->status) {
+                case 0:
+                    $dt->statusMessage = "Ticket Rejected";
+                    break;
+                case 1:
+                    $dt->statusMessage = "Ticket Submitted";
+                    break;
+                case 2:
+                    $dt->statusMessage = "Category Changed";
+                    break;
+                case 3:
+                    $dt->statusMessage = "Assigned to Technician";
+                    break;
+                case 4:
+                    $dt->statusMessage = "On Progress";
+                    break;
+                case 5:
+                    $dt->statusMessage = "Pending";
+                    break;
+                case 6:
+                    $dt->statusMessage = "Comply";
+                    break;
+                case 7:
+                    $dt->statusMessage = "Not Comply";
+                    break;
+                default:
+                    $dt->statusMessage = "Unknown";
+            }
+
+            $sheet->setCellValue('A' . $row, $no++);
+            $sheet->setCellValue('B' . $row, $dt->id_ticket);
+            $sheet->setCellValue('C' . $row, $dt->id_kondisi);
+            $sheet->setCellValue('D' . $row, $dt->tanggal);
+            $sheet->setCellValue('E' . $row, $dt->deadline);
+            $sheet->setCellValue('F' . $row, $dt->nama_sub_kategori);
+            $sheet->setCellValue('G' . $row, $dt->lokasi);
+            $sheet->setCellValue('H' . $row, $dt->problem_summary);
+            $sheet->setCellValue('I' . $row, $dt->last_update);
+            $sheet->setCellValue('J' . $row, gmdate("H:i:s", $dt->durasi_waktu));
+            $sheet->setCellValue('K' . $row, $dt->teknisi);
+            $sheet->setCellValue('L' . $row, $dt->statusMessage);
+
+            $row++;
         }
 
-        $sheet->setCellValue('A' . $row, $no++);
-        $sheet->setCellValue('B' . $row, $dt->id_ticket);
-        $sheet->setCellValue('C' . $row, $dt->id_kondisi);
-        $sheet->setCellValue('D' . $row, $dt->tanggal);
-        $sheet->setCellValue('E' . $row, $dt->deadline);
-        $sheet->setCellValue('F' . $row, $dt->nama_sub_kategori);
-        $sheet->setCellValue('G' . $row, $dt->lokasi);
-        $sheet->setCellValue('H' . $row, $dt->problem_summary);
-        $sheet->setCellValue('I' . $row, $dt->last_update);
-        $sheet->setCellValue('J' . $row, gmdate("H:i:s", $dt->durasi_waktu));
-        $sheet->setCellValue('K' . $row, $dt->teknisi);
-        $sheet->setCellValue('L' . $row, $dt->statusMessage);
+        $filename = "DataTicket.xlsx";
+        // Set the response headers and output the file
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        header('Expires: 0');
+        header('Pragma: public');
 
-        $row++;
+        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
     }
-
-    $filename = "DataTicket.xlsx";
-
-    // Set the response headers and output the file
-    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    header('Content-Disposition: attachment;filename="' . $filename . '"');
-    header('Cache-Control: max-age=0');
-    header('Expires: 0');
-    header('Pragma: public');
-
-    $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-    $writer->save('php://output');
-    exit;
 }
 
-}
-
-    /**
+/**
     public function update($id)
     {
         //Session
@@ -917,9 +938,9 @@ class List_ticket extends CI_Controller
             }
         }
     }
-    **/
+ **/
 
-    /**
+/**
     public function reopen($id)
     {
         //User harus admin, tidak boleh role user lain
@@ -936,9 +957,9 @@ class List_ticket extends CI_Controller
             redirect('Errorpage');
         } 
     }
-    **/
+ **/
 
-     /**
+/**
     public function indexpilih()
     {
         //User harus admin, tidak boleh role user lain
@@ -965,4 +986,4 @@ class List_ticket extends CI_Controller
             redirect('Errorpage');
         }
     }
-    **/
+ **/

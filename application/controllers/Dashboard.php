@@ -1,6 +1,8 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+date_default_timezone_set('Asia/Jakarta');
+
 class Dashboard extends CI_Controller
 {
 	public function __construct()
@@ -296,6 +298,14 @@ class Dashboard extends CI_Controller
 
         //Resume ticket
         $data['dataticketuser']         = $this->model_app->myticket($id_user)->result();
+
+        $data['absensi']                = null;
+        $rekapAbsen                     = $this->model_app->getRekapAbsensiById($id_user)->result();
+        if(empty($rekapAbsen)){
+                $data['absensi'] = 'belum_absen';
+        } else {
+                $data['absensi'] = 'sudah_absen';
+        }
 
         $this->load->view('template', $data);
 	}
@@ -604,6 +614,7 @@ class Dashboard extends CI_Controller
 
         //Resume ticket
         $data['dataticketuser']         = $this->model_app->myticket($id_user)->result();
+        
 
         $this->load->view('template', $data);
 	}
@@ -1056,5 +1067,22 @@ class Dashboard extends CI_Controller
 
         $this->load->view('template', $data);
 	}
+
+        public function Kehadiran(){
+        
+        $id_user        = $this->session->userdata('id_user');
+        $tanggal        = date('Y-m-d');
+        $jam_masuk      = date('H:i:s');
+
+        $data = array(
+        'nik'           => $id_user,
+        'tanggal'       => $tanggal,
+        'jam_masuk'     => $jam_masuk
+        );
+
+        $this->model_app->insertAbsensi($data);
+        $this->session->set_flashdata('absensi', 'sudah_absen');
+        redirect('Dashboard');
+        }
         
 }
