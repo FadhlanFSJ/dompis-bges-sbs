@@ -136,6 +136,7 @@
 							<th>Max TTR</th>
 						<!--<th>Close</th>-->
 							<th>Teknisi</th>
+							<th>Teknisi2</th>
 							<th>Sub Category</th>
 							<th>SO</th>
 							<th>SID/INET/NOTEL</th>
